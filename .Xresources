@@ -1,0 +1,13 @@
+*VT100*foreground:      wheat
+*VT100*background:      black
+*VT100*saveLines:       2500
+*VT100*scrollBar:       true
+*VT100*visualBell:      true
+*XTerm*font:            -b&h-lucida console-medium-r-semi condensed--0-0-0-0-m-0-iso8859-7
+*XTerm*faceName:        -b&h-lucida console-medium-r-semi condensed--0-0-0-0-m-0-iso8859-7
+*XTerm*faceSize:        12
+*XTerm*renderFont:      true
+! To write in Greek, set this in your .bashrc
+!    XTERM_LOCALE=el_GR.iso88597
+! and uncomment this:
+!*XTerm*locale:          true
