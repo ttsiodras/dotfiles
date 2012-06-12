@@ -91,3 +91,7 @@ fi
 
 # Fastest image viewer ever - start it zoomed
 alias feh='feh -FZ'
+
+# ss (show stack) and csd (change shown dir)
+# Shamelessly copied from https://gist.github.com/1154129
+. dirstack.sh
