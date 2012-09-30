@@ -85,8 +85,9 @@ bind -m vi-insert "\C-w.":backward-kill-word
 . /etc/profile.d/infinality-settings.sh
 
 # Fixup my XTerms, mostly
-if [ "$TERM" == "xterm" ] ; then
+if [[ $TERM == xterm* ]] ; then
     xrdb -merge $HOME/.Xresources
+    xrdb -merge $HOME/.Xdefaults
 fi
 
 # Fastest image viewer ever - start it zoomed
@@ -94,4 +95,4 @@ alias feh='feh -FZ'
 
 # ss (show stack) and csd (change shown dir)
 # Shamelessly copied from https://gist.github.com/1154129
-. dirstack.sh
+. $HOME/dirstack.sh
