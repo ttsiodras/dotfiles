@@ -3,7 +3,7 @@
 export LS_COLORS="di=1"
 alias l='ls -alF --color'
 alias ls='ls --color'
-export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\]\n\[\e[0m\]\$ '
+export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\$ '
 
 # Much better manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -92,6 +92,7 @@ fi
 
 # Fastest image viewer ever - start it zoomed
 alias feh='feh -FZ'
+alias r="sudo -i"
 
 # ss (show stack) and csd (change shown dir)
 # Shamelessly copied from https://gist.github.com/1154129
