@@ -1,2 +1,5 @@
+! Use -color app-defaults in /usr/X11R6/lib/X11/app-defaults
 *customization: -color
+
+! This is our TERM
 XTerm*termName:  xterm-256color
