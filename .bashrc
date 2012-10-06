@@ -81,14 +81,16 @@ bind -m vi-insert "\C-a.":beginning-of-line
 bind -m vi-insert "\C-e.":end-of-line
 bind -m vi-insert "\C-w.":backward-kill-word
 
-# Infinality fonts
-. /etc/profile.d/infinality-settings.sh
-
-# Fixup my XTerms, mostly
-if [[ $TERM == xterm* ]] ; then
-    xrdb -merge $HOME/.Xresources
-    xrdb -merge $HOME/.Xdefaults
-fi
+# Moved this section to .xinitrc (faster startup of my XTerms now)
+#
+# # Infinality fonts
+# . /etc/profile.d/infinality-settings.sh
+#
+# # Fixup my XTerms, mostly
+# if [[ $TERM == xterm* ]] ; then
+#     xrdb -merge $HOME/.Xresources
+#     xrdb -merge $HOME/.Xdefaults
+# fi
 
 # Fastest image viewer ever - start it zoomed
 alias feh='feh -FZ'
