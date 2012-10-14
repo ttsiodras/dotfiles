@@ -99,3 +99,6 @@ alias r="sudo -i"
 # ss (show stack) and csd (change shown dir)
 # Shamelessly copied from https://gist.github.com/1154129
 . $HOME/dirstack.sh
+
+# Load machine-specific specs
+[ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
