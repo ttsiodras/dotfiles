@@ -1,7 +1,8 @@
 set editing-mode vi
+set keymap vi-command
+".":insert-last-argument
 set keymap vi-insert
-bind -m vi-command ".":insert-last-argument
-bind -m vi-insert "\C-l.":clear-screen
-bind -m vi-insert "\C-a.":beginning-of-line
-bind -m vi-insert "\C-e.":end-of-line
-bind -m vi-insert "\C-w.":backward-kill-word
+"\C-l":clear-screen
+"\C-a":beginning-of-line
+"\C-e":end-of-line
+"\C-w":backward-kill-word

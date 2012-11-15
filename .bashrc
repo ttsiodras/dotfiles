@@ -74,12 +74,15 @@ export PATH=$PATH:/usr/lib/git-core
 # VI bindings
 set -o vi
 
-# See http://stackoverflow.com/questions/6839273/bash-readline-equivalent-of-escape-dot-in-vi-mode
-bind -m vi-command ".":insert-last-argument
-bind -m vi-insert "\C-l.":clear-screen
-bind -m vi-insert "\C-a.":beginning-of-line
-bind -m vi-insert "\C-e.":end-of-line
-bind -m vi-insert "\C-w.":backward-kill-word
+# OBSOLETE: migrated to .inputrc, to work for all readline applications
+#
+# ( See http://stackoverflow.com/questions/6839273/bash-readline-equivalent-of-escape-dot-in-vi-mode )
+#
+# bind -m vi-command ".":insert-last-argument
+# bind -m vi-insert "\C-l.":clear-screen
+# bind -m vi-insert "\C-a.":beginning-of-line
+# bind -m vi-insert "\C-e.":end-of-line
+# bind -m vi-insert "\C-w.":backward-kill-word
 
 # Moved this section to .xinitrc (faster startup of my XTerms now)
 #
