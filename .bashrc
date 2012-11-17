@@ -105,3 +105,10 @@ alias r="sudo -i"
 
 # Load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
+
+# Stupid bash-completion defaults
+for i in cat l ls mv strip ldd tail nm cp  patch ln df rmdir indent sha1sum \
+            md5sum rm touch objdump diff base64 less head ; do
+        complete -F _filedir_xspec $i
+done
+complete -d mydu.sh
