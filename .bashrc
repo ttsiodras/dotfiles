@@ -37,6 +37,9 @@ alias grep='grep --color=auto'
 
 # Dont want history? Uncomment this
 #unset HISTFILE
+export HISTSIZE=1000000
+export HISTFILESIZE=1000000
+shopt -s histappend
 
 # I always need floating point accuracy when running bc
 alias bc='bc -l'
