@@ -1,0 +1,141 @@
+# A basic .muttrc for use with Gmail
+
+# Change the following six lines to match your Gmail account details
+set imap_user = "ttsiodras@gmail.com"
+set imap_pass = "PASSWORD"
+set smtp_url = "smtp://ttsiodras@smtp.gmail.com:587/"
+set smtp_pass = "PASSWORD"
+set from = "ttsiodras@gmail.com"
+set realname = "Thanassis Tsiodras"
+
+# Change the following line to a different editor you prefer.
+set editor = "vim"
+
+# I have setup forwarders from all my accounts to GMail;
+# These mails are visible under GMail's "All Mail" folder/label,
+# and so that's what I want to visit by default
+set folder = "imaps://imap.gmail.com:993"
+#set spoolfile = "+INBOX"
+set spoolfile = "+[Gmail]/All Mail"
+set record = "+[GMail]/Sent Mail"
+
+# Settings for offline, mbsync-based operation
+#
+#set folder = "~/mail/[Gmail]/.All Mail"
+#set spoolfile = "~/mail/[Gmail]/.All Mail"
+#
+# Speaking of mbsync ...
+# These are the settings I used in .mbsyncrc:
+#
+# # IMAPAccount      gmail
+# # Host             imap.gmail.com
+# # User             ttsiodras@gmail.com
+# # Pass             PASSWORD
+# # UseIMAPS         yes
+#
+# # # The following 3 certificates were fetched via openssl:
+# # #
+# # #   bash$ openssl s_client -connect imap.gmail.com:993
+# # #
+# # # and I then saved the BEGIN/END sections in the two certificate files.
+# # #
+# # # Since GMail signed them with Equifax, I pointed to that as
+# # # well - and made sure I run "c_rehash" under ~/.cert
+# # # (thus creating symlinks from their hashes under there)
+# #
+# # CertificateFile  ~/.cert/google.pem
+# # CertificateFile  ~/.cert/imap.gmail.com.pem
+# # CertificateFile  /etc/ssl/certs/Equifax_Secure_CA.pem
+# #  
+# # IMAPStore  gmail-remote
+# # Account    gmail
+# #  
+# # MaildirStore  gmail-local
+# # Path          ~/mail/
+# # Inbox         ~/mail/AllMail
+# #  
+# # Channel   gmail
+# # Master    :gmail-remote:
+# # Slave     :gmail-local:
+# # Create    Slave
+# # Expunge   Slave
+# # Sync      PullNew PullDelete
+# # Patterns  "[Gmail]/All Mail"
+
+set imap_check_subscribed
+set hostname = gmail.com
+set mail_check = 120
+set timeout = 300
+set imap_keepalive = 300
+set postponed = "+[GMail]/Drafts"
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+set move = no
+set include
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+set auto_tag = yes
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+alternative_order text/plain text/html *
+auto_view text/html
+bind editor <Tab> complete-query
+bind editor ^T complete
+bind editor <space> noop
+
+#
+# Gmail-style keyboard shortcuts - for IMAP GMail operations (not mbsync)
+#
+folder-hook '+\[Gmail\]/All Mail' 'macro index d ";s+[Gmail]/Trash<enter><enter>" "Move to Gmail Trash"'
+folder-hook '+\[Gmail\]/All Mail' 'macro pager d "s+[Gmail]/Trash<enter><enter>" "Move to Gmail Trash"'
+folder-hook '+\[Gmail\]/Trash' 'macro pager d "<delete-message>" "Move to never never land"'
+folder-hook '+\[Gmail\]/Trash' 'macro index d ";<delete-message>" "Move to never never land"'
+
+macro index,pager gi "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index,pager ga "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+macro index,pager gs "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to sent messages"
+macro index,pager gd "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+
+# Color
+source ~/mutt-colors-solarized-dark-256.muttrc
+
+# Finally, use notmuch to perform lightning fast searches via F8.
+# F9 can also show threading based on the current message.
+#
+# To set notmuch up, I just "notmuch setup" once,
+# and then invoke "notmuch new" after every "mbsync gmail".
+#
+macro index <F8> "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt -r --prompt search<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter>"  "notmuch: search mail"
+macro index <F9> "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt -r thread<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter><enter-command>set wait_key<enter>" "notmuch: reconstruct thread"
+#
+# and speaking of notmuch, this is what was generated after 'notmuch setup' in my .notmuch-config:
+#
+# # [database]
+# # path=/home/ttsiod/mail
+# #
+# # [user]
+# # name=Thanassis Tsiodras
+# # primary_email=ttsiodras@gmail.com
+# # other_email=ttsiodras@youknow.where;ttsiod@yes.there.too.die.spammers.die;
+# #
+# # [new]
+# # tags=unread;inbox;
+# # ignore=
+# #
+# # [search]
+# # exclude_tags=deleted;spam;
+# #
+# # [maildir]
+# # synchronize_flags=true
+
+# This was set by default in Arch, but I keep it here just in case
+#macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+
+# Use notmuch-addresses.sh to have auto-complete (via Ctrl-t) in 'To:' questions
+set query_command = "nottoomuch-addresses.sh '%s'"
+
+# Don't show stupid '+' where text is wrapped.
+set nomarkers
