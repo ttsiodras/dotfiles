@@ -106,5 +106,8 @@ alias r="sudo -i"
 # Shamelessly copied from https://gist.github.com/1154129
 . $HOME/dirstack.sh
 
+# Point the PATH to utilities I use every day ( https://github.com/ttsiodras/utils )
+export PATH=~/bin:$PATH
+
 # Load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
