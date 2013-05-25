@@ -110,5 +110,11 @@ alias pwdx="pwd | xclip ; pwd | xclip -selection clipboard"
 # Point the PATH to utilities I use every day ( https://github.com/ttsiodras/utils )
 export PATH=~/bin:$PATH
 
+# SSH Agent - to work over SSH
+env | grep SSH_CLIENT >/dev/null && {
+    export SSH_AGENT_PID=$(pidof ssh-agent)
+    export SSH_AUTH_SOCK=$(echo /tmp/ssh-*/*)
+}
+
 # Load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
