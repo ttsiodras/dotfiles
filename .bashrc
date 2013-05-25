@@ -101,6 +101,7 @@ set -o vi
 # Fastest image viewer ever - start it zoomed
 alias feh='feh -FZ'
 alias r="sudo -i"
+alias pwdx="pwd | xclip ; pwd | xclip -selection clipboard"
 
 # ss (show stack) and csd (change shown dir)
 # Shamelessly copied from https://gist.github.com/1154129
