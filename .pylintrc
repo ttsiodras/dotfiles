@@ -21,7 +21,7 @@ persistent=yes
 # usually to register additional checkers.
 load-plugins=
 
-init-hook='import sys; sys.path.append("/home/ttsiod/GAIA/CodeGen/Reports"); sys.path.append("/home/ttsiod/GAIA/testing/RegressionTests"; sys.path.append("/home/ttsiod/.virtualenvs/flask/lib/python2.7/"))'
+init-hook='import sys; sys.path.append("/home/ttsiod/GAIA/CodeGen/Reports"); sys.path.append("/home/ttsiod/GAIA/testing/RegressionTests"); sys.path.append("/home/ttsiod/.virtualenvs/flask/lib/python2.7/site-packages/") ; sys.path.append("/home/ttsiod/GAIA/misc/autoDeployer/bin/")'
 
 [MESSAGES CONTROL]
 
