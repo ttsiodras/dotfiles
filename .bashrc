@@ -117,7 +117,7 @@ export PATH=~/bin:$PATH
 #}
 
 # Better alternative (not only ssh-agent, it handles gpg too):
-eval $(keychain --eval)
+eval $(keychain --quiet --eval)
 
 # Load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
