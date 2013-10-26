@@ -138,3 +138,7 @@ set query_command = "nottoomuch-addresses.sh '%s'"
 
 # Don't show stupid '+' where text is wrapped.
 set nomarkers
+
+# checking for new mail with 'G'
+bind index G imap-fetch-mail
+bind pager G imap-fetch-mail
