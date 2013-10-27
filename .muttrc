@@ -135,6 +135,7 @@ macro index <F9> "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt
 
 # Use notmuch-addresses.sh to have auto-complete (via Ctrl-t) in 'To:' questions
 set query_command = "nottoomuch-addresses.sh '%s'"
+set query_format = "%t %-25.24n %a %e"
 
 # Don't show stupid '+' where text is wrapped.
 set nomarkers
