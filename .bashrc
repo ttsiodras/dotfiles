@@ -118,9 +118,11 @@ export PATH=~/bin:$PATH
 
 # Better alternative (not only ssh-agent, it handles gpg too):
 eval $(keychain --quiet --eval)
-ssh-add -l |& grep 'The agent has no identities' > /dev/null && {
-    ssh-add
-}
+if env | grep DISPLAY >/dev/null ; then
+    ssh-add -l |& grep 'The agent has no identities' > /dev/null && {
+        ssh-add
+    }
+fi
 
 # Load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
