@@ -124,5 +124,8 @@ if env | grep DISPLAY >/dev/null ; then
     }
 fi
 
+# For my mutt
+export REPLYTO=ttsiod@ttsiodras.dyndns.org
+
 # Load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
