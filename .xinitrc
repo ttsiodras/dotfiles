@@ -4,6 +4,7 @@
 # My X11 settings
 /usr/bin/xrdb -merge $HOME/.Xresources
 /usr/bin/xrdb -merge $HOME/.Xdefaults
+/usr/bin/xmodmap $HOME/.xmodmap
 
 # Being able to lock is useful
 # /usr/bin/xscreensaver &
