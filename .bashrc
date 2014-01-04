@@ -127,5 +127,8 @@ fi
 # For my mutt
 export REPLYTO=ttsiod@ttsiodras.dyndns.org
 
+# Make the CAPSLOCK key behave as a second CTRL - very useful on many keyboards
+setxkbmap -option ctrl:nocaps
+
 # Load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
