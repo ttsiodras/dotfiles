@@ -103,10 +103,6 @@ alias feh='feh -FZ'
 alias r="sudo -i"
 alias pwdx="pwd | xclip ; pwd | xclip -selection clipboard"
 
-# ss (show stack) and csd (change shown dir)
-# Shamelessly copied from https://gist.github.com/1154129
-. $HOME/dirstack.sh
-
 # Point the PATH to utilities I use every day ( https://github.com/ttsiodras/utils )
 export PATH=~/bin:$PATH
 
