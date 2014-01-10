@@ -110,25 +110,33 @@ alias pwdx="pwd | xclip ; pwd | xclip -selection clipboard"
 # Point the PATH to utilities I use every day ( https://github.com/ttsiodras/utils )
 export PATH=~/bin:$PATH
 
-## SSH Agent - to work over SSH
-#env | grep SSH_CLIENT >/dev/null && {
-#    export SSH_AGENT_PID=$(pidof ssh-agent)
-#    export SSH_AUTH_SOCK=$(echo /tmp/ssh-*/*)
-#}
+# Setup SSH agent - is keychain available?
+if keychain --version >/dev/null 2>&1 ; then
+    # yes, and it's a better alternative, since it handles gpg too:
+    eval $(keychain --quiet --eval)
+else
+    # Manual, error-prone way to setup SSH agent...
+    env | grep SSH_CLIENT >/dev/null && {
+        export SSH_AGENT_PID=$(pidof ssh-agent)
+        export SSH_AUTH_SOCK=$(echo /tmp/ssh-*/*)
+    }
+fi
 
-# Better alternative (not only ssh-agent, it handles gpg too):
-eval $(keychain --quiet --eval)
+# Under X, and no keys? Add em up the first time we run.
 if env | grep DISPLAY >/dev/null ; then
     ssh-add -l |& grep 'The agent has no identities' > /dev/null && {
         ssh-add
     }
 fi
 
-# For my mutt
+# For my mutt sessions - replies sent to little ARM server
 export REPLYTO=ttsiod@ttsiodras.dyndns.org
 
 # Make the CAPSLOCK key behave as a second CTRL - very useful on many keyboards
 setxkbmap -option ctrl:nocaps
+
+# bash-completion for Dropbox
+. $HOME/dotfiles/dropbox.sh
 
 # Load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
