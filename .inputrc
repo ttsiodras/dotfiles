@@ -1,4 +1,5 @@
 set completion-query-items 10000
+set completion-ignore-case On
 set editing-mode vi
 set keymap vi-command
 ".":insert-last-argument
