@@ -8,3 +8,4 @@ set keymap vi-insert
 "\C-a":beginning-of-line
 "\C-e":end-of-line
 "\C-w":backward-kill-word
+"jk":vi-movement-mode
