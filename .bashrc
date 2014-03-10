@@ -129,7 +129,9 @@ fi
 export REPLYTO=ttsiod@ttsiodras.dyndns.org
 
 # Make the CAPSLOCK key behave as a second CTRL - very useful on many keyboards
-setxkbmap -option ctrl:nocaps
+env | grep SSH_CLIENT >/dev/null || {
+    setxkbmap -option ctrl:nocaps
+}
 
 # bash-completion for Dropbox
 . $HOME/dotfiles/dropbox.sh
