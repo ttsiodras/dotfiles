@@ -136,5 +136,21 @@ env | grep SSH_CLIENT >/dev/null || {
 # bash-completion for Dropbox
 . $HOME/dotfiles/dropbox.sh
 
-# Load machine-specific specs
+# OCaml-related stuff
+
+# OPAM configuration
+[ -e $HOME/.opam/opam-init/init.sh ] && {
+    . /home/ttsiod/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+}
+
+# Bug in current version of opam::utop - must clean up CAML_LD_LIBRARY_PATH
+function utop()
+{
+    LIB=$(opam config var lib)
+    export  CAML_LD_LIBRARY_PATH="$LIB/stublibs"
+    BIN=$(opam config var bin)
+    $BIN/utop
+}
+
+# Finally, load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
