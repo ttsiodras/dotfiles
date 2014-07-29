@@ -1,0 +1,13 @@
+# For screen's copy-mode (C-a ESC), I prefer to use my muscle-memoried keys:
+#
+#   v (to enter 'visual selection'
+#   y (to yank it)
+#
+# In screen's case, they both map to the old SPACE behavior,
+# since SPACE is used to mark the beginning AND place the
+# current selection in the paste buffer.
+#
+# After this, just paste: C-a ]
+
+markkeys ' '=v
+markkeys ' '=y
