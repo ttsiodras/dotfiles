@@ -21,3 +21,8 @@ defscrollback 25000
 
 markkeys ' '=v
 markkeys ' '=y
+
+#
+# Reinstate working Shift-PageUp/Down scroll in my screen-ed XTerms
+#
+termcapinfo xterm* ti@:te@
