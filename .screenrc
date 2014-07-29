@@ -1,3 +1,13 @@
+#
+# Sorry 'screen' - I am too used to C-a doing go-to-line-start.
+#
+#escape ^Bb
+
+#
+# Need history
+#
+defscrollback 25000
+
 # For screen's copy-mode (C-a ESC), I prefer to use my muscle-memoried keys:
 #
 #   v (to enter 'visual selection'
