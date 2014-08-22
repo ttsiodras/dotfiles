@@ -121,7 +121,9 @@ fi
 # Under X, and no keys? Add em up the first time we run.
 if env | grep DISPLAY >/dev/null ; then
     ssh-add -l |& grep 'The agent has no identities' > /dev/null && {
-        ssh-add
+        # Better to use 'pass' to add SSH agent keys, instead of plain...
+        #  ssh-add
+        $HOME/dotfiles/setupSshAgentKeysViaPass.sh
     }
 fi
 
