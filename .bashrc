@@ -128,7 +128,7 @@ if env | grep DISPLAY >/dev/null ; then
 fi
 
 # For my mutt sessions - replies sent to little ARM server
-export REPLYTO=ttsiod@ttsiodras.verymad.net
+# export REPLYTO=ttsiod@ttsiodras.verymad.net
 
 # Make the CAPSLOCK key behave as a second CTRL - very useful on many keyboards
 env | grep SSH_CLIENT >/dev/null || {
