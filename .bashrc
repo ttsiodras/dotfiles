@@ -39,6 +39,7 @@ alias grep='grep --color=auto'
 #unset HISTFILE
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000
+export HISTCONTROL=ignorespace
 shopt -s histappend
 
 # I always need floating point accuracy when running bc
