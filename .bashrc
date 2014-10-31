@@ -155,5 +155,10 @@ function utop()
     $BIN/utop
 }
 
+# By default I have git diff come up with meld
+# For fast diffs...
+
+alias gdiffu='git diff --no-ext-diff'
+
 # Finally, load machine-specific specs
 [ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
