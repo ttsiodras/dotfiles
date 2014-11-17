@@ -130,3 +130,6 @@ bindkey -M vicmd "^w" backward-kill-word
 
 # Timeout to switch to vi command code - set to 0.1
 export KEYTIMEOUT=1
+
+# The prompt I am used to - maximum work area left
+export PS1=$'\n%{$fg_bold[green]%n%}@%m %{$fg[white]$(pwd)\n%}${ret_status}%{$fg_bold[green]%}%p%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
