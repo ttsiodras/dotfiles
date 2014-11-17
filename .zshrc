@@ -132,4 +132,8 @@ bindkey -M vicmd "^w" backward-kill-word
 export KEYTIMEOUT=1
 
 # The prompt I am used to - maximum work area left
-export PS1=$'\n%{$fg_bold[green]%n%}@%m %{$fg[white]$(pwd)\n%}${ret_status}%{$fg_bold[green]%}%p%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+precmd() {
+    echo
+    echo $fg_bold[green]$USER@$HOST $fg[white]`pwd`
+}
+export PS1=$'%}${ret_status}%{$fg_bold[green]%}%p%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
