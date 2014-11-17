@@ -119,6 +119,8 @@ bindkey -M viins "^p" up-line-or-history
 bindkey -M viins "^n" down-line-or-history
 bindkey -M viins "^w" backward-kill-word
 bindkey -M viins "\e[3~" delete-char
+bindkey -M viins "\eOH" beginning-of-line
+bindkey -M viins "\eOF" end-of-line
 
 bindkey -M vicmd "^l" clear-screen
 bindkey -M vicmd "^a" beginning-of-line
@@ -129,6 +131,8 @@ bindkey -M vicmd "^p" up-line-or-history
 bindkey -M vicmd "^n" down-line-or-history
 bindkey -M vicmd "^w" backward-kill-word
 bindkey -M vicmd "\e[3~" delete-char
+bindkey -M vicmd "\eOH" beginning-of-line
+bindkey -M vicmd "\eOF" end-of-line
 
 # Timeout to switch to vi command code - set to 0.1
 export KEYTIMEOUT=1
