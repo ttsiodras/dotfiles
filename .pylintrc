@@ -34,7 +34,7 @@ init-hook='import sys; sys.path.append("/home/ttsiod/GAIA/CodeGen/Reports"); sys
 # can either give multiple identifier separated by comma (,) or put this option
 # multiple time (only on the command line, not in the configuration file where
 # it should appear only once).
-disable=C0103,R0901,R0904,R0914,W0703,R0913,W0603,R0903,C0111,W0142,R0912,R0902,R0915,W0212,W0702,E1103
+disable=C0301,C0103,R0901,R0904,R0914,W0703,R0913,W0603,R0903,C0111,W0142,R0912,R0902,R0915,W0212,W0702,E1103,E1120
 # To disable too long lines, add C0301
 
 
