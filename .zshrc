@@ -99,3 +99,21 @@ bindkey '\eOA' up-line-or-beginning-search
 bindkey '\e[A' up-line-or-beginning-search
 bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
+
+#
+# ZSH doesn't care about the .inputrc mappings - so I repeat my readline
+# bindings here (did the same for bash and posted it to Reddit some time ago)
+#
+#   http://www.reddit.com/r/vim/comments/r38nd/if_you_use_vimode_under_bash_and_you_miss_escdot/
+#
+bindkey -M viins "\e." insert-last-word
+
+bindkey -M viins "jk" vi-cmd-mode
+bindkey "^L" clear-screen
+bindkey -M viins "^L" clear-screen
+bindkey "^A" beginning-of-line
+bindkey -M viins "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey -M viins "^E" end-of-line
+bindkey "^W" backward-kill-word
+bindkey -M viins "^W" backward-kill-word
