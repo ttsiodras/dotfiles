@@ -83,7 +83,13 @@ source $ZSH/oh-my-zsh.sh
 # TTSIOD additions
 #
 
-# up arrow must leave the cursor at end of line
+# Finally, load common zsh/bash parts...
+[ -f $HOME/.commonrc ] && . $HOME/.commonrc
+
+# ...and machine-specific parts
+[ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local
+
+# Oh, and up arrow must leave the cursor at end of line
 
 autoload -Uz up-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search
@@ -93,9 +99,3 @@ bindkey '\eOA' up-line-or-beginning-search
 bindkey '\e[A' up-line-or-beginning-search
 bindkey '\eOB' down-line-or-beginning-search
 bindkey '\e[B' down-line-or-beginning-search
-
-# Finally, load common zsh/bash parts...
-[ -f $HOME/.commonrc ] && . $HOME/.commonrc
-
-# ...and machine-specific parts
-[ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local
