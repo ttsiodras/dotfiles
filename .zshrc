@@ -135,7 +135,8 @@ bindkey -M vicmd "\eOH" beginning-of-line
 bindkey -M vicmd "\eOF" end-of-line
 
 # Timeout to switch to vi command code - set to 0.1
-export KEYTIMEOUT=1
+# DISABLED - it breaks 'jk'
+# export KEYTIMEOUT=1
 
 # The prompt I am used to - maximum work area left
 precmd() {
