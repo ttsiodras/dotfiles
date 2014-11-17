@@ -49,7 +49,7 @@ if [ $HOST = "home" ] ; then
     # Poor Atom330 takes 3 sec to start a shell with my work plugins...
     plugins=()
 else
-    plugins=(git svn python npm screen web-search virtualenvwrapper)
+    plugins=(git svn python npm screen web-search)
 fi
 source $ZSH/oh-my-zsh.sh
 

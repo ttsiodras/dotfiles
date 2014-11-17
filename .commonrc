@@ -141,3 +141,13 @@ function utop()
 # For fast diffs...
 
 alias gdiffu='git diff --no-ext-diff'
+
+# Adapt to different virtualenvwrappers under Arch/Debian
+
+if [ -f /usr/bin/virtualenvwrapper.sh ] ; then
+    /usr/bin/virtualenvwrapper.sh
+else
+    if [ -f /etc/bash_completion.d/virtualenvwrapper ] ; then
+        . /etc/bash_completion.d/virtualenvwrapper
+    fi
+fi
