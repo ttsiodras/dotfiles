@@ -116,7 +116,9 @@ fi
 
 # Make the CAPSLOCK key behave as a second CTRL - very useful on many keyboards
 env | grep SSH_CLIENT >/dev/null || {
-    setxkbmap -option ctrl:nocaps
+    if type setxkbmap >/dev/null ; then
+        setxkbmap -option ctrl:nocaps
+    fi
 }
 
 # OCaml-related stuff
