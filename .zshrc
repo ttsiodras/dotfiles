@@ -109,11 +109,24 @@ bindkey '\e[B' down-line-or-beginning-search
 bindkey -M viins "\e." insert-last-word
 
 bindkey -M viins "jk" vi-cmd-mode
-bindkey "^L" clear-screen
-bindkey -M viins "^L" clear-screen
-bindkey "^A" beginning-of-line
-bindkey -M viins "^A" beginning-of-line
-bindkey "^E" end-of-line
-bindkey -M viins "^E" end-of-line
-bindkey "^W" backward-kill-word
-bindkey -M viins "^W" backward-kill-word
+
+bindkey -M viins "^l" clear-screen
+bindkey -M viins "^a" beginning-of-line
+bindkey -M viins "^e" end-of-line
+bindkey -M viins "^r" history-incremental-pattern-search-backward
+bindkey -M viins "^s" history-incremental-pattern-search-forward
+bindkey -M viins "^p" up-line-or-history
+bindkey -M viins "^n" down-line-or-history
+bindkey -M viins "^w" backward-kill-word
+
+bindkey -M vicmd "^l" clear-screen
+bindkey -M vicmd "^a" beginning-of-line
+bindkey -M vicmd "^e" end-of-line
+bindkey -M vicmd "^r" history-incremental-pattern-search-backward
+bindkey -M vicmd "^s" history-incremental-pattern-search-forward
+bindkey -M vicmd "^p" up-line-or-history
+bindkey -M vicmd "^n" down-line-or-history
+bindkey -M vicmd "^w" backward-kill-word
+
+# Timeout to switch to vi command code - set to 0.1
+export KEYTIMEOUT=1
