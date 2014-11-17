@@ -45,8 +45,12 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git svn python npm screen web-search virtualenvwrapper)
-
+if [ $HOST = "home" ] ; then
+    # Poor Atom330 takes 3 sec to start a shell with my work plugins...
+    plugins=()
+else
+    plugins=(git svn python npm screen web-search virtualenvwrapper)
+fi
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
