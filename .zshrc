@@ -170,4 +170,4 @@ precmd() {
     echo
     echo $fg_bold[green]$USER@$HOST $fg[white]`pwd`
 }
-export PS1=$'%}${ret_status}%{$fg_bold[green]%}%p%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+export PS1=$'${ret_status}%{$fg_bold[green]%}%p%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
