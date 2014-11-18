@@ -138,6 +138,29 @@ bindkey -M vicmd "\e[3~" delete-char
 bindkey -M vicmd "\eOH" beginning-of-line
 bindkey -M vicmd "\eOF" end-of-line
 
+# Keypad
+# 0 . Enter
+bindkey -M viins -s "^[Op" "0"
+bindkey -M viins -s "^[Ol" "."
+bindkey -M viins -s "^[OM" "^M"
+# 1 2 3
+bindkey -M viins -s "^[Oq" "1"
+bindkey -M viins -s "^[Or" "2"
+bindkey -M viins -s "^[Os" "3"
+# 4 5 6
+bindkey -M viins -s "^[Ot" "4"
+bindkey -M viins -s "^[Ou" "5"
+bindkey -M viins -s "^[Ov" "6"
+# 7 8 9
+bindkey -M viins -s "^[Ow" "7"
+bindkey -M viins -s "^[Ox" "8"
+bindkey -M viins -s "^[Oy" "9"
+# + -  * /
+bindkey -M viins -s "^[Ok" "+"
+bindkey -M viins -s "^[Om" "-"
+bindkey -M viins -s "^[Oj" "*"
+bindkey -M viins -s "^[Oo" "/"
+
 # Timeout to switch to vi command code - set to 0.1
 # DISABLED - it breaks 'jk'
 # export KEYTIMEOUT=1
