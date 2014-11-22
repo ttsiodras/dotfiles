@@ -1,5 +1,3 @@
-. $HOME/.commonrc
-
 export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\$ '
 
 # Dont want history? Uncomment this
