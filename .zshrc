@@ -126,6 +126,7 @@ bindkey -M viins "\e[3~" delete-char
 bindkey -M viins "\eOH" beginning-of-line
 bindkey -M viins "\eOF" end-of-line
 
+bindkey -M vicmd " " vi-repeat-find
 bindkey -M vicmd "^l" clear-screen
 bindkey -M vicmd "^a" beginning-of-line
 bindkey -M vicmd "^e" end-of-line
