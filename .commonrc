@@ -117,7 +117,7 @@ fi
 # Make the CAPSLOCK key behave as a second CTRL - very useful on many keyboards
 env | grep SSH_CLIENT >/dev/null || {
     if type setxkbmap >/dev/null ; then
-        setxkbmap -option ctrl:nocaps
+        [ ! -z "$DISPLAY" ] && setxkbmap -option ctrl:nocaps
     fi
 }
 
