@@ -104,7 +104,7 @@ fi
 
 # Under X, and no keys? Add em up the first time we run.
 if env | grep DISPLAY >/dev/null ; then
-    ssh-add -l |& grep '/id_dsa' > /dev/null || {
+    ssh-add -l |& grep 'dsa ' > /dev/null || {
         # Better to use 'pass' to add SSH agent keys, instead of plain...
         #  ssh-add
         $HOME/dotfiles/setupSshAgentKeysViaPass.sh
