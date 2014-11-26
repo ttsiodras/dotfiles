@@ -167,8 +167,13 @@ precmd() {
 }
 export PS1=$'${ret_status}%{$fg_bold[green]%}%p%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
-# Override the stupid arrow that breaks XTerm, and use the good old '$' and '#' (normal/root)
+# Override the stupid Unicode symbols in the default theme that break my XTerm
+
+# Use good old '$' and '#' (normal/root)
 local ret_status="%(?:%{$fg_bold[green]%}%(!.#.$) :%{$fg_bold[red]%}%#%s)"
+
+# ... and 'M' for modified Git repos
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}M%{$reset_color%}"
 
 # Finally, load common zsh/bash parts...
 [ -f $HOME/.commonrc ] && . $HOME/.commonrc
