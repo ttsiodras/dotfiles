@@ -125,7 +125,7 @@ env | grep SSH_CLIENT >/dev/null || {
 
 # OPAM configuration
 [ -e $HOME/.opam/opam-init/init.sh ] && {
-    . /home/ttsiod/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+    . $HOME/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 }
 
 # Bug in current version of opam::utop - must clean up CAML_LD_LIBRARY_PATH
