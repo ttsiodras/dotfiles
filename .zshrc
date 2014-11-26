@@ -167,6 +167,9 @@ precmd() {
 }
 export PS1=$'${ret_status}%{$fg_bold[green]%}%p%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
+# Override the stupid arrow that breaks XTerm, and use the good old '$' and '#' (normal/root)
+local ret_status="%(?:%{$fg_bold[green]%}%(!.#.$):%{$fg_bold[red]%}%#%s)"
+
 # Finally, load common zsh/bash parts...
 [ -f $HOME/.commonrc ] && . $HOME/.commonrc
 
