@@ -87,13 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # TTSIOD additions
 #
 
-# Finally, load common zsh/bash parts...
-[ -f $HOME/.commonrc ] && . $HOME/.commonrc
-
-# ...and machine-specific parts
-[ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local
-
-# Oh, and up arrow must leave the cursor at end of line
+# up arrow must leave the cursor at end of line
 
 autoload -Uz up-line-or-beginning-search
 autoload -Uz down-line-or-beginning-search
@@ -172,6 +166,9 @@ precmd() {
     echo $fg_bold[green]$USER@$HOST $fg[white]`pwd`
 }
 export PS1=$'${ret_status}%{$fg_bold[green]%}%p%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+
+# Finally, load common zsh/bash parts...
+[ -f $HOME/.commonrc ] && . $HOME/.commonrc
 
 # ...and machine-specific parts
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local
