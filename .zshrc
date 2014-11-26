@@ -87,17 +87,6 @@ source $ZSH/oh-my-zsh.sh
 # TTSIOD additions
 #
 
-# up arrow must leave the cursor at end of line
-
-autoload -Uz up-line-or-beginning-search
-autoload -Uz down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey '\eOA' up-line-or-beginning-search
-bindkey '\e[A' up-line-or-beginning-search
-bindkey '\eOB' down-line-or-beginning-search
-bindkey '\e[B' down-line-or-beginning-search
-
 #
 # ZSH doesn't care about the .inputrc mappings - so I repeat my readline
 # bindings here (did the same for bash and posted it to Reddit some time ago)
@@ -180,3 +169,15 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}M%{$reset_color%}"
 
 # ...and machine-specific parts
 [ -f $HOME/.zshrc.local ] && . $HOME/.zshrc.local
+
+# up arrow must leave the cursor at end of line
+# This must appear last, for some reason - otherwise it doesn't work
+
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '\eOA' up-line-or-beginning-search
+bindkey '\e[A' up-line-or-beginning-search
+bindkey '\eOB' down-line-or-beginning-search
+bindkey '\e[B' down-line-or-beginning-search
