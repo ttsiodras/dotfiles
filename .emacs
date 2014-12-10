@@ -61,3 +61,9 @@
 ;; You can also customize `ensime-inf-get-project-root' and `ensime-inf-get-repl-cmd-line'
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(add-hook 'ensime-source-buffer-saved-hook 'ensime-show-all-errors-and-warnings)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; spawn shell with F2 in current folder
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-set-key [f2] 'shell)
