@@ -26,8 +26,14 @@
 
 ;; Close window with C-F12
 (define-key evil-normal-state-map (kbd "C-<f12>") 'evil-delete-buffer)
-(define-key evil-normal-state-map (kbd "<f7>") 'ensime-typecheck-all)
-(define-key evil-normal-state-map (kbd "C-]") 'ensime-edit-definition)
+
+;; spawn shell with F2 in current folder
+;; ;; deprecated, too strong:(global-set-key [f2] 'shell)
+(define-key evil-normal-state-map (kbd "<f2>") 'shell)
+
+;; TAB and S-TAB cycle between buffers
+(define-key evil-normal-state-map (kbd "<tab>") 'evil-next-buffer)
+(define-key evil-normal-state-map (kbd "<backtab>") 'evil-prev-buffer)
 
 ;;;;;;;;;;
 ; org mode
@@ -38,9 +44,9 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-;;;;;;;;
+;;;;;;;;;;
 ; ensime
-;;;;;;;;
+;;;;;;;;;;
 
 ;; if you're new to the MELPA package manager, include this in your `~/.emacs` file to add it
 (require 'package)
@@ -63,7 +69,23 @@
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 (add-hook 'ensime-source-buffer-saved-hook 'ensime-show-all-errors-and-warnings)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; spawn shell with F2 in current folder
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key [f2] 'shell)
+(define-key evil-normal-state-map (kbd "<f7>") 'ensime-typecheck-all)
+(define-key evil-normal-state-map (kbd "C-]") 'ensime-edit-definition)
+(define-key evil-normal-state-map (kbd "C-h") 'ensime-inspector-backward-page)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Custom theme and font
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (deeper-blue))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Droid Sans Mono" :foundry "unknown" :slant normal :weight normal :height 113 :width normal)))))
