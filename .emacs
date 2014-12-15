@@ -67,11 +67,31 @@
 ;; You can also customize `ensime-inf-get-project-root' and `ensime-inf-get-repl-cmd-line'
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-(add-hook 'ensime-source-buffer-saved-hook 'ensime-show-all-errors-and-warnings)
+;; (add-hook 'ensime-source-buffer-saved-hook 'ensime-show-all-errors-and-warnings)
 
-(define-key evil-normal-state-map (kbd "<f7>") 'ensime-typecheck-all)
-(define-key evil-normal-state-map (kbd "C-]") 'ensime-edit-definition)
-(define-key evil-normal-state-map (kbd "C-h") 'ensime-inspector-backward-page)
+(defun current-buffer-extension ()
+  (if (stringp (buffer-file-name))
+    (file-name-extension buffer-file-name) 
+    "Unknown"))
+
+(defun handle-f7 ()
+  (interactive)
+  (if (string= (current-buffer-extension) "scala")
+    (ensime-typecheck-all)))
+
+(defun handle-goto-def ()
+  (interactive)
+  (if (string= (current-buffer-extension) "scala")
+    (ensime-edit-definition)))
+
+(defun handle-navigate-back ()
+  (interactive)
+  (if (string= (buffer-name) "*Inspector*")
+    (ensime-inspector-backward-page)))
+
+(define-key evil-normal-state-map (kbd "<f7>") 'handle-f7)
+(define-key evil-normal-state-map (kbd "C-]") 'handle-goto-def)
+(define-key evil-normal-state-map (kbd "C-h") 'handle-navigate-back)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom theme and font
