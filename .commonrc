@@ -106,8 +106,8 @@ fi
 if env | grep DISPLAY >/dev/null ; then
     ssh-add -l |& grep 'dsa ' > /dev/null || {
         # Better to use 'pass' to add SSH agent keys, instead of plain...
-        #  ssh-add
-        $HOME/dotfiles/setupSshAgentKeysViaPass.sh
+        ssh-add
+        # $HOME/dotfiles/setupSshAgentKeysViaPass.sh
     }
 fi
 
@@ -116,7 +116,7 @@ fi
 
 # Make the CAPSLOCK key behave as a second CTRL - very useful on many keyboards
 env | grep SSH_CLIENT >/dev/null || {
-    if type setxkbmap >/dev/null ; then
+    if type setxkbmap >/dev/null 2>&1 ; then
         [ ! -z "$DISPLAY" ] && setxkbmap -option ctrl:nocaps
     fi
 }
