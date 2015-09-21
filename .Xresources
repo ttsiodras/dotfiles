@@ -4,6 +4,9 @@
 *VT100*saveLines:       2500
 *VT100*scrollBar:       true
 *VT100*visualBell:      true
+*VT100*translations:    #override \n\
+                        Shift <Key>Up: scroll-back(4) \n\
+                        Shift <Key>Down: scroll-forw(4)
 !*XTerm*font:            DejaVu Sans Mono
 !*XTerm*faceName:        DejaVu Sans Mono
 *XTerm*font:            Droid Sans Mono
