@@ -5,8 +5,8 @@
 # I need color in my listings and prompts
 #export LS_COLORS="di=34:ln=31"
 export LS_COLORS="di=1"
-alias l='ls -alF --color'
-alias ls='ls --color'
+alias l='ls -alF --color=auto'
+alias ls='ls --color=auto'
 
 # Much better manpages
 export LESS_TERMCAP_mb=$'\E[01;31m'
