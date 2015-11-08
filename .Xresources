@@ -4,9 +4,6 @@
 *VT100*saveLines:       2500
 *VT100*scrollBar:       true
 *VT100*visualBell:      true
-*VT100*translations:    #override \n\
-                        Shift <Key>Up: scroll-back(4) \n\
-                        Shift <Key>Down: scroll-forw(4)
 !*XTerm*font:            DejaVu Sans Mono
 !*XTerm*faceName:        DejaVu Sans Mono
 *XTerm*font:            Droid Sans Mono
@@ -28,6 +25,8 @@
 ! http://unix.stackexchange.com/questions/119679/completion-of-words-on-the-screen-as-in-vim-bash-or-tmux
 XTerm*VT100.Translations: #override \n\
      Meta <Key>/:dabbrev-expand() \n\
+     Shift <Key>Up: scroll-back(4) \n\
+     Shift <Key>Down: scroll-forw(4) \n\
      Shift <Btn1Up>: exec-formatted("c '%t'", PRIMARY)
 ! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
