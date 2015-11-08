@@ -24,3 +24,7 @@
 !    XTERM_LOCALE=el_GR.iso88597
 ! and uncomment this:
 !*XTerm*locale:          true
+
+! from http://unix.stackexchange.com/questions/119679/completion-of-words-on-the-screen-as-in-vim-bash-or-tmux
+XTerm*VT100.Translations: #override \n\
+     Meta <Key>/:dabbrev-expand() \n
