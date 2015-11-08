@@ -21,7 +21,11 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export MANSECT=1,2,3,4,5,6,7,8
 
 # Use lesspipe when opening files (filetype based decoding)
-export LESSOPEN='|lesspipe.sh %s'
+if [ $(type -P lesspipe.sh) ] ; then
+    export LESSOPEN='|lesspipe.sh %s'
+elif [ $(type -P lesspipe) ] ; then
+    export LESSOPEN='|lesspipe %s'
+fi
 
 # Dear LucasArts, use my soft midi
 export SCUMMVM_PORT=128:0
