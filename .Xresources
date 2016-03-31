@@ -25,6 +25,7 @@
 ! http://unix.stackexchange.com/questions/119679/completion-of-words-on-the-screen-as-in-vim-bash-or-tmux
 XTerm*VT100.Translations: #override \n\
      Meta <Key>/:dabbrev-expand() \n\
+     Shift <Key>space: insert-selection(PRIMARY) \n\
      Shift <Key>Up: scroll-back(4) \n\
      Shift <Key>Down: scroll-forw(4) \n\
      Shift <Btn1Up>: exec-formatted("c '%t'", PRIMARY)
