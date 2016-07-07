@@ -38,8 +38,8 @@
 (define-key evil-normal-state-map (kbd "<f2>") 'shell)
 
 ;; TAB and S-TAB cycle between buffers
-(define-key evil-normal-state-map (kbd "<tab>") 'evil-next-buffer)
-(define-key evil-normal-state-map (kbd "<backtab>") 'evil-prev-buffer)
+;;(define-key evil-normal-state-map (kbd "<tab>") 'evil-next-buffer)
+;;(define-key evil-normal-state-map (kbd "<backtab>") 'evil-prev-buffer)
 
 ;;;;;;;;;;
 ; org mode
