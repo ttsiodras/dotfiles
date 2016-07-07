@@ -1,4 +1,4 @@
-export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\$ '
+export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\[$txtcyn\]${git_branch}\[${txtred}\]${git_dirty}\[$txtrst\]\$ '
 
 # Dont want history? Uncomment this
 #unset HISTFILE
@@ -19,6 +19,10 @@ shopt -s checkwinsize
 # bind -m vi-insert "\C-a.":beginning-of-line
 # bind -m vi-insert "\C-e.":end-of-line
 # bind -m vi-insert "\C-w.":backward-kill-word
+
+# Setup git-aware prompt
+export GITAWAREPROMPT=$HOME/dotfiles/git-prompt/
+. "${GITAWAREPROMPT}/main.sh"
 
 # bash-completion for Dropbox
 . $HOME/dotfiles/dropbox.sh

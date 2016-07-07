@@ -1,0 +1,3 @@
+[submodule "git-prompt"]
+	path = git-prompt
+	url = https://github.com/jimeh/git-aware-prompt.git
