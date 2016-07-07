@@ -27,8 +27,7 @@ XTerm*VT100.Translations: #override \n\
      Meta <Key>/:dabbrev-expand() \n\
      Shift <Key>Right: insert-selection(PRIMARY) \n\
      Shift <Key>Up: scroll-back(4) \n\
-     Shift <Key>Down: scroll-forw(4) \n\
-     Shift <Btn1Up>: exec-formatted("c '%t'", PRIMARY)
+     Shift <Key>Down: scroll-forw(4)
 ! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
