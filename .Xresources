@@ -6,8 +6,10 @@
 *VT100*visualBell:      true
 !*XTerm*font:            DejaVu Sans Mono
 !*XTerm*faceName:        DejaVu Sans Mono
-*XTerm*font:            Droid Sans Mono
-*XTerm*faceName:        Droid Sans Mono
+!*XTerm*font:            Droid Sans Mono
+!*XTerm*faceName:        Droid Sans Mono
+*XTerm*font:            Consolas
+*XTerm*faceName:        Consolas
 *XTerm*faceSize:        12
 !
 !*XTerm*font:            -b&h-lucida console-medium-r-semi condensed--0-0-0-0-m-0-iso8859-7
