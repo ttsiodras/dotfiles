@@ -18,8 +18,8 @@
 # Common GNOME/Xsel clipboard
 # ...or you could just add these lines to a new file:
 #  /etc/X11/xinit/xinitrc.d/40-autocutsel 
-/usr/bin/autocutsel -fork &
-/usr/bin/autocutsel -selection PRIMARY -fork &
+# /usr/bin/autocutsel -fork &
+# /usr/bin/autocutsel -selection PRIMARY -fork &
 
 # Lead on, window manager...
 # Make sure whichever of the lines below you choose actually points to existing files
