@@ -1,5 +1,13 @@
 set completion-query-items 10000
 set completion-ignore-case On
+#
+# This is how you'd disable VIM mode in readline inputing
+# for a specific application:
+#
+# $if !Gdb
+#     set editing-mode vi
+# $endif
+#
 set editing-mode vi
 set keymap vi-command
 ".":insert-last-argument

@@ -3,3 +3,6 @@
 
 ! This is our TERM
 XTerm*termName:  xterm-256color
+
+! Don't autoscroll to the bottom
+XTerm*scrollTtyOutput: false
