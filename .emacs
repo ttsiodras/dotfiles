@@ -57,7 +57,7 @@
 ;; if you're new to the MELPA package manager, include this in your `~/.emacs` file to add it
 (require 'package)
 (add-to-list 'package-archives
-         '("melpa" . "http://melpa.milkbox.net/packages/") t)
+         '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 (when (not package-archive-contents)
   (package-refresh-contents))
