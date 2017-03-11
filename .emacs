@@ -152,3 +152,11 @@
 ;; ignore case during filename completion in C-x C-f
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq read-file-name-completion-ignore-case t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-mode source code blocks
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((sh . t) (perl . t) (python . t)))
+;;(setq org-confirm-babel-evaluate nil)
