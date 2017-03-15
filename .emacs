@@ -186,8 +186,17 @@
 ;; line number
 ;;;;;;;;;;;;;;;;
 (global-linum-mode t)
-(linum-mode)
-(linum-relative-global-mode)
+;;
+;; DEPRECATED - don't auto-enable linum, because we don't want it in
+;; org-mode, or shell or...
+;; Instead, depend on linum-off.el (in here) to selectively toggle
+;; numbers (and relative numbers) on or off, based on file type.
+;;
+;;(linum-mode)
+;;(linum-relative-global-mode)
+;;
+(add-to-list 'load-path "~/.emacs.d/linum-off/")
+(require 'linum-off)
 
 ;;;;;;;;;;;;;;;;;
 ;; powerline
