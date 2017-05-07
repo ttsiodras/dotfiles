@@ -25,8 +25,9 @@
 !*XTerm*locale:          true
 
 ! http://unix.stackexchange.com/questions/119679/completion-of-words-on-the-screen-as-in-vim-bash-or-tmux
+
 XTerm*VT100.Translations: #override \n\
-     Shift <Key>Left: dabbrev-expand() \n\
+     Meta <Key>/: dabbrev-expand() \n\
      Shift <Key>Right: insert-selection(PRIMARY) \n\
      Shift <Key>Up: scroll-back(4) \n\
      Shift <Key>Down: scroll-forw(4)
