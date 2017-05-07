@@ -21,6 +21,15 @@
 # /usr/bin/autocutsel -fork &
 # /usr/bin/autocutsel -selection PRIMARY -fork &
 
+# CAPS LOCK must be set to ESCAPE (Vim)
+/usr/bin/setxkbmap -option ctrl:nocaps
+
+# For i3, Alt is a horrendous choice if you are Greek.
+# So, load the default state...
+# xmodmap /home/ttsiod/.Xmodmap.default
+# ...and then set mod3 to the Cmd key.
+# xmodmap -e "add mod3 = Super_L"
+
 # Lead on, window manager...
 # Make sure whichever of the lines below you choose actually points to existing files
 

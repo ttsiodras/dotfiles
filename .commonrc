@@ -118,12 +118,16 @@ fi
 # For my mutt sessions - replies sent to little ARM server
 # export REPLYTO=ttsiod@ttsiodras.verymad.net
 
-# Make the CAPSLOCK key behave as a second CTRL - very useful on many keyboards
-env | grep SSH_CLIENT >/dev/null || {
-    if type setxkbmap >/dev/null 2>&1 ; then
-        [ ! -z "$DISPLAY" ] && setxkbmap -option ctrl:nocaps
-    fi
-}
+# OBSOLETE Make the CAPSLOCK key behave as a second CTRL - very useful on many keyboards
+# OBSOLETE
+# OBSOLETE This should be done in .xinitrc, not here
+# OBSOLETE
+#env | grep SSH_CLIENT >/dev/null || {
+#    if type setxkbmap >/dev/null 2>&1 ; then
+#        [ ! -z "$DISPLAY" ] && setxkbmap -option ctrl:nocaps
+#        echo
+#    fi
+#}
 
 # OCaml-related stuff
 
