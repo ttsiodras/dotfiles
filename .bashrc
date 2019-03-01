@@ -31,10 +31,10 @@ shopt -s checkwinsize
 }
 
 # bash-completion for Dropbox
-. $HOME/dotfiles/dropbox.sh
+. "${HOME}"/dotfiles/dropbox.sh
 
 # Finally, load common zsh/bash parts...
-[ -f $HOME/.commonrc ] && . $HOME/.commonrc
+[ -f "${HOME}"/.commonrc ] && . "${HOME}"/.commonrc
 
 # ...and machine-specific parts
-[ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
+[ -f "${HOME}"/.bashrc.local ] && . "${HOME}"/.bashrc.local
