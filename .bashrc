@@ -1,4 +1,7 @@
+# Generic prompt
 # export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\$ '
+#
+# Git-aware prompt aware
 export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\[$txtcyn\]${git_branch}\[${txtred}\]${git_dirty}\[$txtrst\]\$ '
 
 # Dont want history? Uncomment this
@@ -22,14 +25,16 @@ shopt -s checkwinsize
 # bind -m vi-insert "\C-w.":backward-kill-word
 
 # Setup git-aware prompt
-export GITAWAREPROMPT=$HOME/dotfiles/git-prompt/
-. "${GITAWAREPROMPT}/main.sh"
+[ -f "${HOME}"/dotfiles/git-prompt/main.sh ] && {
+    export GITAWAREPROMPT="${HOME}"/dotfiles/git-prompt/
+    . "${GITAWAREPROMPT}/main.sh"
+}
 
 # bash-completion for Dropbox
-. $HOME/dotfiles/dropbox.sh
+. "${HOME}"/dotfiles/dropbox.sh
 
 # Finally, load common zsh/bash parts...
-[ -f $HOME/.commonrc ] && . $HOME/.commonrc
+[ -f "${HOME}"/.commonrc ] && . "${HOME}"/.commonrc
 
 # ...and machine-specific parts
-[ -f $HOME/.bashrc.local ] && . $HOME/.bashrc.local
+[ -f "${HOME}"/.bashrc.local ] && . "${HOME}"/.bashrc.local
