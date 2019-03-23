@@ -106,6 +106,9 @@ else
     }
 fi
 
+# Speaking of agents - this is mandatory if you use gpg in a pipe
+export GPG_TTY=$(tty)
+
 # Under X, and no keys? Add em up the first time we run.
 if env | grep DISPLAY >/dev/null ; then
     ssh-add -l |& grep 'dsa ' > /dev/null || {
