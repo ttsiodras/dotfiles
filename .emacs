@@ -235,3 +235,8 @@
 ;(add-to-list 'load-path "~/.emacs.d/fsharp-mode/")
 ;(autoload 'fsharp-mode "fsharp-mode"     "Major mode for editing F# code." t)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; for proper code syntax highlighting in https://github.com/caiorss/org-nav-theme
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq org-src-fontify-natively t)
+(setq org-html-htmlize-font-prefix "org-")
