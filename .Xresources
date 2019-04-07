@@ -34,3 +34,9 @@ XTerm*VT100.Translations: #override \n\
 ! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
+
+URxvt.transparent: true
+URxvt.shading:20
+
+! Included this so you know how to make your foreground not match the color of your background
+URxvt.foreground: #eeeeee
