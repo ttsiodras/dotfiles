@@ -162,3 +162,18 @@ else
         . /etc/bash_completion.d/virtualenvwrapper
     fi
 fi
+
+# fzf-based utilities
+
+function cdf()
+{
+    DDR="$(find . -type d |fzf)"
+    if [ -n "$DDR" ] ; then
+        cd "$DDR" || return
+    fi
+}
+
+function killf {
+    PIDD=$(ps auxf | fzf | awk '{print $2}')
+    [ -n "$PID" ] && kill $PIDD
+}
