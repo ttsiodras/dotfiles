@@ -2,7 +2,11 @@
 # export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\$ '
 #
 # Git-aware prompt aware
-export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\[$txtcyn\]${git_branch}\[${txtred}\]${git_dirty}\[$txtrst\]\$ '
+if [ ! -z "$PS1" ] ; then
+    # But only set this is we are in an interactive shell (PS1 defined)
+    # Otherwise we break SCP!
+    export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\[$txtcyn\]${git_branch}\[${txtred}\]${git_dirty}\[$txtrst\]\$ '
+fi
 
 # Dont want history? Uncomment this
 #unset HISTFILE
