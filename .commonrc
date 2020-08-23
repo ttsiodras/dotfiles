@@ -177,8 +177,7 @@ function cdf()
 
 function killf()
 {
-    PIDD=$(ps auxf | fzf | awk '{print $2}')
-    [ -n "$PID" ] && sudo kill $PIDD
+    ps auxf | fzf | awk '{print $2}' | sudo xargs -r kill
 }
 
 function openf
