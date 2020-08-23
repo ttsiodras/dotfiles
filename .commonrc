@@ -167,13 +167,36 @@ fi
 
 function cdf()
 {
-    DDR="$(find . -type d |fzf)"
+    LE_BASE_DIR="${1:-.}"
+    DDR="$(find -L "${LE_BASE_DIR}" -type d | \
+         fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)"
     if [ -n "$DDR" ] ; then
         cd "$DDR" || return
     fi
 }
 
-function killf {
+function killf()
+{
     PIDD=$(ps auxf | fzf | awk '{print $2}')
-    [ -n "$PID" ] && kill $PIDD
+    [ -n "$PID" ] && sudo kill $PIDD
 }
+
+function openf
+{
+    # xargs -r will only run if there's something to run
+    # xargs -o will reopen stdin as /dev/tty before spawning child
+    # (allows interactive processes, e.g. vim)
+    LE_BASE_DIR="${1:-.}"
+    find "${LE_BASE_DIR}" -type f | \
+         fzf -m --preview="xdg-mime query default {}" | \
+         xargs -ro -d "\n" xdg-open 2>&-
+}
+
+pacs()
+{
+    sudo pacman -S $(pacman -Ssq | \
+         fzf -m --preview="pacman -Si {}" --preview-window=:hidden --bind=space:toggle-preview)
+}
+
+bind '"\C-f":"cdf\n"'
+bind '"\C-o":"openf\n"'
