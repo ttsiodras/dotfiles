@@ -28,6 +28,13 @@ shopt -s checkwinsize
 # bind -m vi-insert "\C-e.":end-of-line
 # bind -m vi-insert "\C-w.":backward-kill-word
 
+# Instead of showing the options, just cycle through them
+# e.g. with folders "Documents" and "Downloads"
+#    cd D<tab>
+# ...will now cycle through them.
+bind '"\t":menu-complete'
+
+
 # Setup git-aware prompt
 [ -f "${HOME}"/dotfiles/git-prompt/main.sh ] && {
     export GITAWAREPROMPT="${HOME}"/dotfiles/git-prompt/
