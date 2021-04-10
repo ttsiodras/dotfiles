@@ -68,6 +68,13 @@
 (require 'evil-leader)
 (global-evil-leader-mode)
 
+;;;;;;;;;;;;;;;;;;;
+; evil collection
+;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/evil-collection/" user-emacs-directory))
+(require 'evil-collection)
+(evil-collection-init)
+
 ;; Start in evil mode
 (evil-mode 1)
 
@@ -177,14 +184,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (deeper-blue)))
+ '(custom-enabled-themes '(deeper-blue))
  '(custom-safe-themes
-   (quote
-    ("582e9531b4f788cb66441b58038759f140c3670a403b9c124fa3ea7b7ab0d967" default)))
+   '("582e9531b4f788cb66441b58038759f140c3670a403b9c124fa3ea7b7ab0d967" default))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   (quote
-    (htmlize ox-reveal powerline linum-relative helm evil-leader ensime))))
+   '(## evil-collection magit htmlize ox-reveal powerline linum-relative helm evil-leader ensime)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
