@@ -177,7 +177,7 @@ function cdf()
 
 function killf()
 {
-    ps auxf | fzf | awk '{print $2}' | sudo xargs -r kill
+    ps auxf | fzf -m | awk '{print $2}' | sudo xargs -r kill
 }
 
 function openf
