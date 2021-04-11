@@ -32,7 +32,7 @@ shopt -s checkwinsize
 # e.g. with folders "Documents" and "Downloads"
 #    cd D<tab>
 # ...will now cycle through them.
-bind '"\t":menu-complete'
+# bind '"\t":menu-complete'
 
 
 # Setup git-aware prompt
