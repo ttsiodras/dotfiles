@@ -41,6 +41,11 @@ shopt -s checkwinsize
     . "${GITAWAREPROMPT}/main.sh"
 }
 
+# Dont pollute the $HOME folder with .PROGNAME_history files
+export RLWRAP_HOME=$HOME/.config/rlwrap
+mkdir -p "${RLWRAP_HOME}"
+export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
+
 # bash-completion for Dropbox
 . "${HOME}"/dotfiles/dropbox.sh
 

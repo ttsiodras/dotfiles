@@ -50,6 +50,12 @@ alias cmucl='rlwrap cmucl'
 alias clisp='rlwrap clisp'
 alias ocaml='rlwrap ocaml'
 alias sbcl='rlwrap sbcl'
+alias sdcv='rlwrap sdcv'
+alias gdb='rlwrap gdb'
+alias openocd='rlwrap openocd'
+alias psql='rlwrap psql'
+alias scala='rlwrap scala'
+alias sqlite3='sqlite3 scala'
 
 # For QT builds
 export QMAKESPEC=linux-g++
