@@ -46,9 +46,6 @@ export RLWRAP_HOME=$HOME/.config/rlwrap
 mkdir -p "${RLWRAP_HOME}"
 export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
 
-# bash-completion for Dropbox
-. "${HOME}"/dotfiles/dropbox.sh
-
 # Finally, load common zsh/bash parts...
 [ -f "${HOME}"/.commonrc ] && . "${HOME}"/.commonrc
 
