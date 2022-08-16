@@ -113,12 +113,11 @@ else
 fi
 
 # Speaking of agents - this is mandatory if you use gpg in a pipe
-export GPG_TTY=$(tty)
+#export GPG_TTY=$(tty)
 
 # Under X, and no keys? Add em up the first time we run.
 if env | grep DISPLAY >/dev/null ; then
-    ssh-add -l |& grep 'dsa ' > /dev/null || {
-        # Better to use 'pass' to add SSH agent keys, instead of plain...
+    ssh-add -l |& grep '/.ssh/id_.*sa' > /dev/null || {
         ssh-add
         # $HOME/dotfiles/setupSshAgentKeysViaPass.sh
     }
@@ -195,12 +194,6 @@ function openf
     find "${LE_BASE_DIR}" -type f | \
          fzf -m --preview="xdg-mime query default {}" | \
          xargs -ro -d "\n" -n 1 xdg-open 2>&-
-}
-
-pacs()
-{
-    sudo pacman -S $(pacman -Ssq | \
-         fzf -m --preview="pacman -Si {}" --preview-window=:hidden --bind=space:toggle-preview)
 }
 
 bind '"\C-f":"cdf\n"'
