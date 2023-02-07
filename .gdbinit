@@ -5,3 +5,7 @@ set print pretty on
 set history save on
 set debuginfod enabled off
 set scheduler-locking on
+define xxd
+    dump binary memory dump.bin $arg0 $arg0+$arg1
+    shell xxd dump.bin
+end
