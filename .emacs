@@ -64,14 +64,16 @@
 
 ; Stop evil from defining TAB key behavior; we need it for org-mode
 (setq evil-want-C-i-jump nil)
+(setq evil-want-keybinding nil)
 (require 'evil)
 (require 'evil-leader)
+(define-key evil-insert-state-map (kbd "C-h") 'delete-backward-char)
 (global-evil-leader-mode)
 
 ;;;;;;;;;;;;;;;;;;;
 ; evil collection
 ;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/evil-collection/" user-emacs-directory))
+;(add-to-list 'load-path (expand-file-name "~/.emacs.d/evil-collection/" user-emacs-directory))
 (require 'evil-collection)
 (evil-collection-init)
 
@@ -189,7 +191,7 @@
    '("582e9531b4f788cb66441b58038759f140c3670a403b9c124fa3ea7b7ab0d967" default))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(## evil-collection magit htmlize ox-reveal powerline linum-relative helm evil-leader ensime)))
+   '(evil powerline-evil evil-collection magit htmlize ox-reveal powerline linum-relative helm evil-leader ensime)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
