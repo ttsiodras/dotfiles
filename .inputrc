@@ -18,3 +18,5 @@ set keymap vi-insert
 "\C-e":end-of-line
 "\C-w":backward-kill-word
 "jk":vi-movement-mode
+set colored-stats on
+set colored-completion-prefix on
