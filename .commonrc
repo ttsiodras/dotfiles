@@ -55,7 +55,7 @@ alias gdb='rlwrap gdb'
 alias openocd='rlwrap openocd'
 alias psql='rlwrap psql'
 alias scala='rlwrap scala'
-alias sqlite3='sqlite3 scala'
+alias sqlite3='rlwrap sqlite3'
 
 # For QT builds
 export QMAKESPEC=linux-g++
