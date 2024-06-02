@@ -203,7 +203,9 @@
 ;;;;;;;;;;;;;;;;;
 ;; line number
 ;;;;;;;;;;;;;;;;
-(global-linum-mode t)
+;; (global-linum-mode t)
+(global-display-line-numbers-mode 1)
+(setq display-line-numbers-type 'relative)
 ;;
 ;; DEPRECATED - don't auto-enable linum, because we don't want it in
 ;; org-mode, or shell or...
