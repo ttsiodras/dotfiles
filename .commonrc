@@ -193,7 +193,7 @@ function openf
     LE_BASE_DIR="${1:-.}"
     find "${LE_BASE_DIR}" -type f | \
          fzf -m --preview="xdg-mime query default {}" | \
-         xargs -ro -d "\n" -n 1 xdg-open 2>&-
+         while read ANS ; do xdg-open "$ANS" 2>&- & done
 }
 
 bind '"\C-f":"cdf\n"'
