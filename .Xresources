@@ -35,6 +35,10 @@ XTerm*VT100.Translations: #override \n\
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
 
+XTerm.vt100.translations: #override \n\
+  Ctrl <Key> 9: smaller-vt-font() \n\
+  Ctrl <Key> 0: larger-vt-font()
+
 URxvt.transparent: true
 URxvt.shading:20
 
