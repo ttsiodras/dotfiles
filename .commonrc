@@ -82,7 +82,7 @@ export PATH=$PATH:/usr/lib/git-core
 set -o vi
 
 # Fastest image viewer ever - start it zoomed
-alias feh='feh -FZ'
+alias feh='feh -Z -g 1920x1080+3840+0'
 alias r="sudo -i"
 alias pwdx="pwd | xclip ; pwd | xclip -selection clipboard"
 
@@ -196,9 +196,16 @@ function openf
          while read ANS ; do xdg-open "$ANS" 2>&- & done
 }
 
+function graph
+{
+    asciigraph -w $(($COLUMNS - 10)) -h $(($LINES - 10))
+}
+
 bind '"\C-f":"cdf\n"'
 bind '"\C-o":"openf\n"'
 
 alias wdiff="wdiff -n -w $'\033[30;41m' -x $'\033[0m' -y $'\033[30;42m' -z $'\033[0m'"
 
 alias vivado_lab='vivado_lab  -nojournal -nolog'
+
+alias o=xdg-open
