@@ -13,7 +13,11 @@ set keymap vi-command
 ".":insert-last-argument
 " ":";"
 set keymap vi-insert
+$if gdb
+"\C-l":"refresh\n"
+$else
 "\C-l":clear-screen
+$endif
 "\C-a":beginning-of-line
 "\C-e":end-of-line
 "\C-w":backward-kill-word
