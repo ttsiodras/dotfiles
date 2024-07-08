@@ -47,3 +47,9 @@ URxvt.foreground: #eeeeee
 
 urxvt.perl-ext-common: default,tabbed,matcher,resize-font,-tabbed,url-select,keyboard-select
 urxvt.font: xft:Droid Sans Mono:pixelsize=14
+
+! Xft.dpi: 200
+
+*XTerm*allowWindowOps: true
+*XTerm*allowFontOps: true
+*XTerm*allowTitleOps: true
