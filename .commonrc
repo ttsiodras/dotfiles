@@ -211,6 +211,12 @@ function graph
 bind '"\C-f":"cdf\n"'
 bind '"\C-o":"openf\n"'
 
+# VI command mode bindings
+# List all with 
+#    bind -m vi-command -p
+# ..and e.g. bind:
+#    bind -m vi-command '"G": end-of-history'
+
 alias wdiff="wdiff -n -w $'\033[30;41m' -x $'\033[0m' -y $'\033[30;42m' -z $'\033[0m'"
 
 alias vivado_lab='vivado_lab  -nojournal -nolog'
