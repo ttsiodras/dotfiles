@@ -4,7 +4,7 @@
 
 # I need color in my listings and prompts
 #export LS_COLORS="di=34:ln=31"
-export LS_COLORS="di=1"
+export LS_COLORS="di=1;37"
 alias l='ls -alF --color=auto'
 alias ls='ls --color=auto'
 
