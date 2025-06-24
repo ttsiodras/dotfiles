@@ -110,7 +110,7 @@ export PATH=~/bin:$PATH
 # Setup SSH agent - is keychain available?
 if type keychain >/dev/null 2>&1 ; then
     # yes, and it's a better alternative, since it handles gpg too:
-    eval $(keychain --agents ssh --quiet --eval)
+    eval $(keychain --quiet --eval)
 else
     # Manual, error-prone way to setup SSH agent...
     env | grep SSH_CLIENT >/dev/null && {
