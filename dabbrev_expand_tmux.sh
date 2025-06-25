@@ -2,7 +2,7 @@
 
 function _print_all_panes() {
   for pane_id in $(tmux list-panes -F '#{pane_id}'); do
-    tmux capture-pane -p -J -S 0 -E - -t "$pane_id" | tr ' ' '\n' | sort -u | grep -E '[a-zA-Z0-9]+'
+    tmux capture-pane -p -J -S - -E - -t "$pane_id" | tr ' ' '\n' | sort -u | grep -E '[a-zA-Z0-9/:\.\?=-]+'
   done
 }
 
