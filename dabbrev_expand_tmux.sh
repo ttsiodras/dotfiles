@@ -2,7 +2,7 @@
 
 function _print_all_panes() {
   for pane_id in $(tmux list-panes -F '#{pane_id}'); do
-    tmux capture-pane -p -J -S - -E - -t "$pane_id" | tr ' ' '\n' | sort -u | grep -E '[a-zA-Z0-9/:\.\?=-]+'
+    tmux capture-pane -p -J -S - -E - -t "$pane_id" | tr ' ' '\n' | grep -E '[a-zA-Z0-9/:\.\?=-]+'
   done
 }
 
@@ -30,7 +30,7 @@ _tmux_pane_words() {
   local prompt="${before_word} ␣ ${after_word} "
   
   # Get selected word from fzf
-  local selected_word=$(_print_all_panes | fzf --query="$current_word" --prompt="$prompt" --height=20 --layout=reverse --no-sort --print-query | tail -n1)
+  local selected_word=$(_print_all_panes | fzf --tac --exact --query="^$current_word" --prompt="$prompt" --height=20 --layout=reverse --no-sort --print-query | tail -n1)
   
   # If user selected something, replace the current word
   if [[ -n "$selected_word" && "$selected_word" != "$current_word" ]]; then
