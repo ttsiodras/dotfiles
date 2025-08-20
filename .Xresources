@@ -4,51 +4,49 @@
 *VT100*saveLines:       2500
 *VT100*scrollBar:       true
 *VT100*visualBell:      true
-!*XTerm*font:            DejaVu Sans Mono
-!*XTerm*faceName:        DejaVu Sans Mono
 *XTerm*font:            Droid Sans Mono
 *XTerm*faceName:        Droid Sans Mono
-!*XTerm*font:            Noto Mono
-!*XTerm*faceName:        Noto Mono
-*XTerm*faceSize:        11
-!
-!*XTerm*font:            -b&h-lucida console-medium-r-semi condensed--0-0-0-0-m-0-iso8859-7
-!*XTerm*faceName:        -b&h-lucida console-medium-r-semi condensed--0-0-0-0-m-0-iso8859-7
-!
-!*XTerm*font:            -b&h-Lucida Console-medium-r-semi condensed--0-0-0-0-m-0-iso8859-7
-!*XTerm*faceName:        -b&h-Lucida Console-medium-r-semi condensed--0-0-0-0-m-0-iso8859-7
-!
+*XTerm*faceSize:        7
 *XTerm*renderFont:      true
-! To write in Greek, set this in your .bashrc
-!    XTERM_LOCALE=el_GR.iso88597
-! and uncomment this:
-!*XTerm*locale:          true
+
+*XTerm*faceNameDoublesize: Droid Sans Mono
+*XTerm*fontMenu*fontdefault*Label: Default
+*XTerm*fontMenu*font1*Label: Unreadable
+XTerm*font1: xft:Droid Sans Mono:size=4
+*XTerm*fontMenu*font2*Label: Tiny
+XTerm*font2: xft:Droid Sans Mono:size=5
+*XTerm*fontMenu*font3*Label: Small
+XTerm*font3: xft:Droid Sans Mono:size=6
+*XTerm*fontMenu*font4*Label: Medium
+XTerm*font4: xft:Droid Sans Mono:size=7
+*XTerm*fontMenu*font5*Label: Large
+XTerm*font5: xft:Droid Sans Mono:size=8
+*XTerm*fontMenu*font6*Label: Huge
+XTerm*font6: xft:Droid Sans Mono:size=9
 
 ! http://unix.stackexchange.com/questions/119679/completion-of-words-on-the-screen-as-in-vim-bash-or-tmux
-
+! Auto complete with Alt-/ from everything shown on screen.
 XTerm*VT100.Translations: #override \n\
      Meta <Key>/: dabbrev-expand() \n\
      Shift <Key>Right: insert-selection(PRIMARY) \n\
      Shift <Key>Up: scroll-back(4) \n\
      Shift <Key>Down: scroll-forw(4)
+
 ! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
+! word selection selects urls and files/paths completely
 XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
 
+! Ctrl-9 smaller font, Ctrl-0 larger font
 XTerm.vt100.translations: #override \n\
   Ctrl <Key> 9: smaller-vt-font() \n\
   Ctrl <Key> 0: larger-vt-font()
 
 URxvt.transparent: true
 URxvt.shading:20
-
-! Included this so you know how to make your foreground not match the color of your background
 URxvt.foreground: #eeeeee
-
 urxvt.perl-ext-common: default,tabbed,matcher,resize-font,-tabbed,url-select,keyboard-select
 urxvt.font: xft:Droid Sans Mono:pixelsize=14
-
-! Xft.dpi: 200
 
 *XTerm*allowWindowOps: true
 *XTerm*allowFontOps: true
