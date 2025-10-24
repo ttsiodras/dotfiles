@@ -33,6 +33,9 @@ elif [ $(type -P lesspipe) ] ; then
     export LESSOPEN='|lesspipe %s'
 fi
 
+# Less defaults to half screen width horizontal scrolls by default. I dont even.
+alias less="less -#10"
+
 # Dear LucasArts, use my soft midi
 export SCUMMVM_PORT=128:0
 
