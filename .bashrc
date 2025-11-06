@@ -5,7 +5,8 @@
 if [ ! -z "$PS1" ] ; then
     # But only set this is we are in an interactive shell (PS1 defined)
     # Otherwise we break SCP!
-    export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\[$txtcyn\]${git_branch}\[${txtred}\]${git_dirty}\[$txtrst\]\$ '
+    [ -f /.dockerenv ] && MACHINE_TYPE="DOCKER " || MACHINE_TYPE=""
+    export PS1='\n'"$MACHINE_TYPE"'\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\[$txtcyn\]${git_branch}\[${txtred}\]${git_dirty}\[$txtrst\]\$ '
 fi
 
 # Dont want history? Uncomment this
@@ -51,3 +52,5 @@ export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
 
 # ...and machine-specific parts
 [ -f "${HOME}"/.bashrc.local ] && . "${HOME}"/.bashrc.local
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
