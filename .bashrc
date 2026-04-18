@@ -51,3 +51,8 @@ export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
 
 # ...and machine-specific parts
 [ -f "${HOME}"/.bashrc.local ] && . "${HOME}"/.bashrc.local
+
+# Sanitize your PATH, Luke
+export PATH=$(echo $PATH|sed 's,:,\n,g' | awk '!a[$0]++;' | tr '\n' ':')
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
