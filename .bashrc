@@ -58,4 +58,5 @@ export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
 # Older way for fzf env var setup, but still exists in some of my machines
 [ -f ~/.fzf.bash ] && . ~/.fzf.bash
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Cleanup duplicates from PATH
+export PATH="$(echo "$PATH" | sed 's,:,\n,g' | awk '!a[$0]++' | tr '\n' ':' | sed 's,:$,,')"
