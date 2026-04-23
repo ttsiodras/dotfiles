@@ -1,8 +1,10 @@
+# shellcheck disable=SC1091
+#
 # Generic prompt
 # export PS1='\n\[\e[32;1m\]\u@\h\[\e[37;1m\] \w\n\[\e[0m\]\$ '
 #
 # Git-aware prompt aware
-if [ ! -z "$PS1" ] ; then
+if [ -n "$PS1" ] ; then
     # But only set this is we are in an interactive shell (PS1 defined)
     # Otherwise we break SCP!
     [ -f /.dockerenv ] && MACHINE_TYPE="DOCKER " || MACHINE_TYPE=""
@@ -37,8 +39,8 @@ shopt -s checkwinsize
 
 
 # Setup git-aware prompt
-[ -f "${HOME}"/dotfiles/git-prompt/main.sh ] && {
-    export GITAWAREPROMPT="${HOME}"/dotfiles/git-prompt/
+[ -f ~/dotfiles/git-prompt/main.sh ] && {
+    export GITAWAREPROMPT=~/dotfiles/git-prompt/
     . "${GITAWAREPROMPT}/main.sh"
 }
 
@@ -48,9 +50,12 @@ mkdir -p "${RLWRAP_HOME}"
 export RLWRAP_EDITOR="vim '+call cursor(%L,%C)'"
 
 # Finally, load common zsh/bash parts...
-[ -f "${HOME}"/.commonrc ] && . "${HOME}"/.commonrc
+[ -f ~/.commonrc ] && . ~/.commonrc
 
 # ...and machine-specific parts
-[ -f "${HOME}"/.bashrc.local ] && . "${HOME}"/.bashrc.local
+[ -f ~/.bashrc.local ] && . ~/.bashrc.local
+
+# Older way for fzf env var setup, but still exists in some of my machines
+[ -f ~/.fzf.bash ] && . ~/.fzf.bash
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
