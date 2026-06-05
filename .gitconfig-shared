@@ -1,0 +1,10 @@
+# Shared git config, synced via the dotfiles repo.
+# Wired into ~/.gitconfig by installme.sh via [include] path=.
+# Add machine-independent git settings here; they propagate on the next pull.
+
+[alias]
+	# difftastic-powered variants (suffix: dt). Real git subcommands, so
+	# bash completion works. GIT_EXTERNAL_DIFF only fires when invoked.
+	diffdt = !GIT_EXTERNAL_DIFF=difft git diff --ext-diff
+	logdt  = !GIT_EXTERNAL_DIFF=difft git log -p --ext-diff
+	showdt = !GIT_EXTERNAL_DIFF=difft git show --ext-diff
