@@ -163,10 +163,8 @@ function utop()
     $BIN/utop
 }
 
-# By default I have git diff come up with meld
-# For fast diffs...
-
-alias gdiffu='git diff --no-ext-diff'
+# Edit in vim (using GitGutter) all modified files; aka "git add -p" on steroids
+alias gdiff='vim $(git -C $(git rev-parse --show-toplevel) diff --name-only | sed "s|^|$(git rev-parse --show-toplevel)/|")'
 
 # Adapt to different virtualenvwrappers under Arch/Debian
 
