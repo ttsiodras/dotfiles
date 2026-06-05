@@ -34,8 +34,8 @@ echo "$XFT_SETTINGS" | xrdb -merge > /dev/null 2>&1
 # (...or you could just add these lines to a new file,
 #  named, say, 40-autocutsel in the directory:
 #    /etc/X11/xinit/xinitrc.d/
-# autocutsel -fork &
-# autocutsel -selection PRIMARY -fork &
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
 
 # Set backlight and stop the stupid udisks Arch service
 #
@@ -56,11 +56,22 @@ setxkbmap -option ctrl:nocaps us
 # xmodmap -e "add mod3 = Super_L"
 
 # A terminal is always nice - esp. for i3 and a bad 'mod' setting...
-# xterm &
+xterm &
+
+# I live in i3, and I need some automation
+( sleep 1 ; i3-msg 'workspace 10; exec xterm -e /home/ttsiod/bin.local/genesis.sh' ) &
+( sleep 2.4 ; i3-msg 'workspace 2' ) &
+
+/home/ttsiod/bin.local/backgrounds.pl &
+disown
 
 # Nice background in space
 #/usr/local/bin/xlivebg &
-#disown
+# disown
+
+# Protect my eyes...
+redshift &
+disown
 
 # Lead on, window manager...
 # Make sure whichever of the lines below you choose actually points to existing files
@@ -69,6 +80,6 @@ setxkbmap -option ctrl:nocaps us
 #disown
 
 #. /etc/X11/Xsession
-exec /usr/bin/i3
+exec /usr/bin/i3 --shmlog-size 0
 #exec /usr/bin/icewm-session
 #exec /usr/bin/lxsession
