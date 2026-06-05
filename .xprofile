@@ -1,0 +1,5 @@
+# Sourced by GDM (via /etc/X11/Xsession.d/40x11-common_xsessionrc) after
+# ~/.Xresources is merged, and by ~/.xinitrc on startx machines.
+# Per-machine overrides (e.g. Xft.dpi) live in ~/.Xresources.local, which is
+# kept out of the dotfiles repo. Merged last, so it wins over ~/.Xresources.
+[ -f "$HOME/.Xresources.local" ] && xrdb -merge "$HOME/.Xresources.local"
