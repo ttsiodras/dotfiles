@@ -2,7 +2,8 @@
 
 function _print_all_panes() {
   for pane_id in $(tmux list-panes -F '#{pane_id}'); do
-    tmux capture-pane -p -J -S - -E - -t "$pane_id" | tr ' ' '\n' | grep -E '[a-zA-Z0-9/:\.\?=-]+'
+    # Keep tokens of word-ish chars, incl. literal . ? / : = - 
+    tmux capture-pane -p -J -S - -E - -t "$pane_id" | tr ' ' '\n' | grep -E '[a-zA-Z0-9/:.?=-]+'
   done
 }
 
@@ -40,4 +41,5 @@ _tmux_pane_words() {
   fi
 }
 
-bind -x '"\C-k": _tmux_pane_words'
+# Only bind in interactive shells; `bind` errors otherwise (scp, cron, ...).
+[[ $- == *i* ]] && bind -x '"\C-k": _tmux_pane_words'
