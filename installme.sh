@@ -4,7 +4,7 @@ set -u
 cd "$HOME" || exit 1
 
 # Files we manage as symlinks into ~/dotfiles.
-files=(.bashrc .bash_profile .profile .inputrc .commonrc .tmux.conf .xprofile)
+files=(.bashrc .bash_profile .profile .inputrc .commonrc .tmux.conf .xprofile .emacs .Xresources .xinitrc .pythonStartup .Xdefaults .screenrc)
 
 for f in "${files[@]}"; do
     # Already the symlink we want: nothing to back up, nothing to relink.
