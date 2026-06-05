@@ -1,0 +1,24 @@
+_myipmi_complete() {
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  local prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+  # Collect flags already on the command line
+  local has_action=
+  for w in "${COMP_WORDS[@]:1}"; do
+    [[ "$w" == -on || "$w" == -off || "$w" == -restart ]] && has_action=1
+  done
+
+  # If no action flag yet, complete flags (and maybe hostnames too)
+  if [[ -z "$has_action" ]]; then
+    local flags="-on -off -restart"
+    COMPREPLY=( $(compgen -W "$flags" -- "$cur") )
+    return
+  fi
+
+  # Offer short hostnames (strip ipmi- prefix) from /etc/hosts
+  local hosts
+  hosts=$(grep -oP '(?<=\s)ipmi-\K\S+' /etc/hosts 2>/dev/null)
+  COMPREPLY=( $(compgen -W "$hosts" -- "$cur") )
+}
+
+complete -F _myipmi_complete myipmi
