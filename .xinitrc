@@ -1,5 +1,7 @@
 #!/bin/bash
 # HOME=/home/ttsiod
+# Ensure /usr/bin is on PATH at X start (some BSD display managers start X with
+# a minimal PATH). Harmless on Linux where it is already present.
 export PATH=/usr/bin:$PATH
 
 # X Fonts
