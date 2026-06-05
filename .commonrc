@@ -87,9 +87,6 @@ export PYTHONSTARTUP=~/.pythonStartup
 # Android dev stuff
 #export PATH=$PATH:/opt/android-sdk-linux/platform-tools/:/opt/android-ndk-r6b-mine/bin/:/opt/android-ndk-r6b/:/opt/android-sdk-linux/tools/
 
-# VI bindings
-set -o vi
-
 # Fastest image viewer ever - start it zoomed
 # alias feh='feh -Z -g 1920x1080+3840+0'
 alias feh='feh -Z'
@@ -110,30 +107,27 @@ export PATH=~/bin:$PATH
 #     xrdb -merge $HOME/.Xdefaults
 # fi
 
-# Setup SSH agent - is keychain available?
+# Setup SSH agent - is keychain available? (Wiring the agent into the
+# environment must run for non-interactive shells too, so scp/git can use it.)
 if type keychain >/dev/null 2>&1 ; then
     # yes, and it's a better alternative, since it handles gpg too:
     eval $(keychain --quiet --eval)
 else
-    # Manual, error-prone way to setup SSH agent...
+    # No keychain. If we're in an SSH session but the socket wasn't inherited,
+    # re-attach to the newest agent socket owned by us (own only, to avoid
+    # grabbing another user's stale agent).
     env | grep SSH_CLIENT >/dev/null && {
-        export SSH_AGENT_PID=$(pidof ssh-agent)
-        export SSH_AUTH_SOCK=$(echo /tmp/ssh-*/*)
+        sock=$(find /tmp -maxdepth 2 -user "$(id -u)" -name 'agent.*' -type s -printf '%T@ %p\n' 2>/dev/null | sort -rn | head -1 | cut -d' ' -f2-)
+        [ -S "$sock" ] && {
+            export SSH_AUTH_SOCK="$sock"
+            export SSH_AGENT_PID=$(pgrep -u "$(id -u)" ssh-agent | head -1)
+        }
+        unset sock
     }
 fi
 
 # Speaking of agents - this is mandatory if you use gpg in a pipe
 #export GPG_TTY=$(tty)
-
-# Under X, in an interactive shell, and no keys? Add em up the first time we
-# run. The interactive guard ($- has 'i') keeps ssh-add's passphrase prompt
-# from blocking non-interactive shells (scp, cron, etc.).
-if [[ $- == *i* ]] && env | grep DISPLAY >/dev/null ; then
-    ssh-add -l |& grep '/.ssh/id_.*sa' > /dev/null || {
-        ssh-add
-        # $HOME/dotfiles/setupSshAgentKeysViaPass.sh
-    }
-fi
 
 # For my mutt sessions - replies sent to little ARM server
 # export REPLYTO=ttsiod@ttsiodras.verymad.net
@@ -211,9 +205,6 @@ function graph
     asciigraph -w $(($COLUMNS - 10)) -h $(($LINES - 10))
 }
 
-bind '"\C-f":"cdf\n"'
-bind '"\C-o":"openf\n"'
-
 # VI command mode bindings
 # List all with 
 #    bind -m vi-command -p
@@ -232,3 +223,26 @@ alias ..='cd ..'
 alias ..2='cd ../../'
 alias ..3='cd ../../../'
 alias ..4='cd ../../../../'
+
+#############################################################
+# Interactive-only setup. Gated behind $- containing 'i' so
+# none of this (readline mode, key bindings, ssh-add's
+# passphrase prompt) runs in non-interactive shells like
+# scp, cron, or sourced scripts.
+#############################################################
+if [[ $- == *i* ]] ; then
+    # VI bindings in readline
+    set -o vi
+
+    # Quick-launch the fzf helpers (functions defined above)
+    bind '"\C-f":"cdf\n"'
+    bind '"\C-o":"openf\n"'
+
+    # Under X with no keys loaded? Add them once.
+    if env | grep DISPLAY >/dev/null ; then
+        ssh-add -l |& grep '/.ssh/id_.*sa' > /dev/null || {
+            ssh-add
+            # $HOME/dotfiles/setupSshAgentKeysViaPass.sh
+        }
+    fi
+fi
