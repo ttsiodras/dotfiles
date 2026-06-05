@@ -246,3 +246,6 @@ if [[ $- == *i* ]] ; then
         }
     fi
 fi
+
+# Enable sixel
+#printf '\e[?80h'
