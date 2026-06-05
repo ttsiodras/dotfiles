@@ -1,5 +1,5 @@
 #######################################
-# Common settings for both bash and zsh
+# Common interactive shell settings (bash)
 #######################################
 
 # I need color in my listings and prompts
@@ -82,7 +82,7 @@ export PYTHONDOCS=/usr/share/doc/python/html/
 export PYTHONSTARTUP=~/.pythonStartup
 
 # Git helpers - I need to be able to TAB-select them all
-export PATH=$PATH:/usr/lib/git-core
+[ -d /usr/lib/git-core ] && export PATH=$PATH:/usr/lib/git-core
 
 # Android dev stuff
 #export PATH=$PATH:/opt/android-sdk-linux/platform-tools/:/opt/android-ndk-r6b-mine/bin/:/opt/android-ndk-r6b/:/opt/android-sdk-linux/tools/
@@ -125,8 +125,10 @@ fi
 # Speaking of agents - this is mandatory if you use gpg in a pipe
 #export GPG_TTY=$(tty)
 
-# Under X, and no keys? Add em up the first time we run.
-if env | grep DISPLAY >/dev/null ; then
+# Under X, in an interactive shell, and no keys? Add em up the first time we
+# run. The interactive guard ($- has 'i') keeps ssh-add's passphrase prompt
+# from blocking non-interactive shells (scp, cron, etc.).
+if [[ $- == *i* ]] && env | grep DISPLAY >/dev/null ; then
     ssh-add -l |& grep '/.ssh/id_.*sa' > /dev/null || {
         ssh-add
         # $HOME/dotfiles/setupSshAgentKeysViaPass.sh
@@ -224,15 +226,9 @@ alias vivado_lab='vivado_lab  -nojournal -nolog'
 
 alias o=xdg-open
 
-source ~/dotfiles/dabbrev_expand_tmux.sh
+[ -f ~/dotfiles/dabbrev_expand_tmux.sh ] && . ~/dotfiles/dabbrev_expand_tmux.sh
 
 alias ..='cd ..'
 alias ..2='cd ../../'
 alias ..3='cd ../../../'
-alias ..4='cd ../../../'
-alias ..5='cd ../../../../'
-alias ..6='cd ../../../../../'
-alias ..7='cd ../../../../../../'
-alias ..8='cd ../../../../../../../'
-alias ..9='cd ../../../../../../../../'
-alias ..10='cd ../../../../../../../../../'
+alias ..4='cd ../../../../'
