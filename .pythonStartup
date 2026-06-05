@@ -25,5 +25,8 @@
 #atexit.register(save_history)
 #del os, atexit, readline, rlcompleter, save_history, historyPath
 
-import rlcompleter, readline
-readline.parse_and_bind('tab: complete')
+try:
+    import rlcompleter, readline
+    readline.parse_and_bind('tab: complete')
+except ImportError:
+    pass
