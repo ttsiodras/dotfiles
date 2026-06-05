@@ -58,6 +58,8 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
+(require 'htmlize nil t)
+
 ;;;;;;;;;;;
 ; evil mode
 ;;;;;;;;;;;
@@ -139,8 +141,8 @@
 ;; (setenv "PATH" (concat "/path/to/scala/bin:" (getenv "PATH")))
 
 ;; You can also customize `ensime-inf-get-project-root' and `ensime-inf-get-repl-cmd-line'
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(when (require 'ensime nil t)
+  (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))
 ;; (add-hook 'ensime-source-buffer-saved-hook 'ensime-show-all-errors-and-warnings)
 
 ;; Key mappings for scala (maybe others, too?)
@@ -216,7 +218,7 @@
 ;;(linum-relative-global-mode)
 ;;
 (add-to-list 'load-path "~/.emacs.d/linum-off/")
-(require 'linum-off)
+(require 'linum-off nil t)
 
 ;;;;;;;;;;;;;;;;;
 ;; powerline
@@ -226,7 +228,7 @@
 ;;;;;;;;;
 ;; helm
 ;;;;;;;;;
-(require 'helm-config)
+(require 'helm-config nil t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ignore case during filename completion in C-x C-f
@@ -249,3 +251,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq org-src-fontify-natively t)
 (setq org-html-htmlize-font-prefix "org-")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Per-machine overrides (untracked, not in dotfiles)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(load "~/.emacs.local" t)
