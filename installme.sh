@@ -3,16 +3,28 @@
 set -u
 cd "$HOME" || exit 1
 
-# Back up the distro defaults once (only if not already backed up).
-for f in .bashrc .profile; do
-    if [ -e "$f" ] && [ ! -L "$f" ] && [ ! -e "$f.defaults" ]; then
+# Files we manage as symlinks into ~/dotfiles.
+files=(.bashrc .bash_profile .profile .inputrc .commonrc .tmux.conf)
+
+for f in "${files[@]}"; do
+    # Already the symlink we want: nothing to back up, nothing to relink.
+    [ "$(readlink "$f" 2>/dev/null)" = "dotfiles/$f" ] && continue
+
+    # Back up a pre-existing real file once, so ln never destroys it silently.
+    # Only a regular file (not a symlink) is worth saving, and only if we have
+    # not already saved one. This guard keeps re-runs from clobbering a good
+    # backup with whatever happens to be there now.
+    if [ -e "$f" ] && [ ! -L "$f" ]; then
+        if [ -e "$f.defaults" ]; then
+            # A real file is here but a backup already exists, so we will not
+            # clobber it. Leave it untouched and warn instead.
+            echo "WARNING: ~/$f is a real file and ~/$f.defaults already exists; skipping symlink" >&2
+            continue
+        fi
         mv "$f" "$f.defaults" || exit 1
     fi
-done
-
-# Symlink dotfiles into $HOME. ln -sfn replaces an existing/old symlink
-# in place and is a no-op when the link already points where we want.
-for f in .bashrc .bash_profile .profile .inputrc .commonrc .tmux.conf; do
+    # ln -sfn replaces an old symlink in place and is a no-op when the link
+    # already points where we want.
     ln -sfn "dotfiles/$f" "$f"
 done
 
