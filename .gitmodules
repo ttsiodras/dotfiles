@@ -1,3 +1,6 @@
 [submodule "git-prompt"]
 	path = git-prompt
 	url = git@github.com:ttsiodras/git-aware-prompt.git
+[submodule "tmux-resurrect"]
+	path = tmux-resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect
