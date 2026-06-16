@@ -250,9 +250,9 @@ fi
 # Quickly quit w3m pager. Also, if possible, use high-intensity colors (old man here)
 w3m() {
     if command w3m --help 2>&1 | grep -q -- '[[:space:]]-H[[:space:]]'; then
-        command w3m -H -o confirm_qq=0 "$@"
+        command w3m -H -o confirm_qq=0 -o color=1 "$@"
     else
-        command w3m -o confirm_qq=0 "$@"
+        command w3m -o confirm_qq=0 -o color=1 "$@"
     fi
 }
 
