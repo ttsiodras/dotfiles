@@ -51,9 +51,6 @@ alias grep='grep --color=auto'
 # I always need floating point accuracy when running bc
 alias bc='bc -l'
 
-# Quickly quit w3m pager
-alias w3m='w3m -H -o confirm_qq=0'
-
 # I need readline in all these
 alias cmucl='rlwrap cmucl'
 alias clisp='rlwrap clisp'
@@ -249,3 +246,24 @@ fi
 
 # Enable sixel
 #printf '\e[?80h'
+
+# Quickly quit w3m pager. Also, if possible, use high-intensity colors (old man here)
+w3m() {
+    if command w3m --help 2>&1 | grep -q -- '[[:space:]]-H[[:space:]]'; then
+        command w3m -H -o confirm_qq=0 "$@"
+    else
+        command w3m -o confirm_qq=0 "$@"
+    fi
+}
+
+# Show markdown with decent formating
+mdview() {
+    if [ "$#" -ne 1 ]; then
+        printf 'usage: mdview FILE.md\n' >&2
+        return 2
+    fi
+
+    pandoc -f markdown -t html "$1" |
+        sed 's/<table\([^>]*\)>/<table border="1"\1>/g' |
+        w3m -T text/html
+}
