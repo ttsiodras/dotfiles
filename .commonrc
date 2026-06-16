@@ -159,6 +159,9 @@ function utop()
 # Edit in vim (using GitGutter) all modified files; aka "git add -p" on steroids
 alias gdiff='vim $(git -C $(git rev-parse --show-toplevel) diff --name-only | sed "s|^|$(git rev-parse --show-toplevel)/|")'
 
+# make difftastic (used in my 'git diffdt') always try to make parse-based diffs and never fallback to plain text.
+DFT_PARSE_ERROR_LIMIT=1000000
+
 # Adapt to different virtualenvwrappers under Arch/Debian
 
 if [ -f /usr/bin/virtualenvwrapper.sh ] ; then
