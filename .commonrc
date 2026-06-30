@@ -270,19 +270,16 @@ mdview() {
     html=$(pandoc -f markdown -t html "$1" |
         sed 's/<table\([^>]*\)>/<table border="1"\1>/g')
 
-    if type elinks >/dev/null 2>&1 ; then
-        # elinks reads HTML from stdin, no temp file needed
-        printf '%s' "$html" | elinks
-    elif type links >/dev/null 2>&1 || type links2 >/dev/null 2>&1 ; then
+    if type links >/dev/null 2>&1 || type links2 >/dev/null 2>&1 || type w3m >/dev/null 2>&1 ; then
         # links/links2 can't read stdin, so use a temp file
         local browser tmp
-        type links2 >/dev/null 2>&1 && browser=links2 || browser=links
+        type links2 >/dev/null 2>&1 && browser=links2 || type links >/dev/null 2>&1 && browser=links || browser=w3m
         tmp=$(mktemp --suffix=.html) || return 1
         printf '%s' "$html" >"$tmp"
         "$browser" "$tmp"
         rm -f "$tmp"
     else
-        printf 'mdview: need elinks, links, or links2 installed\n' >&2
+        printf 'mdview: need links, or links2 installed\n' >&2
         return 1
     fi
 }
