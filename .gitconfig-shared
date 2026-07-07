@@ -8,3 +8,11 @@
 	diffdt = !GIT_EXTERNAL_DIFF=difft git diff --ext-diff
 	logdt  = !GIT_EXTERNAL_DIFF=difft git log -p --ext-diff
 	showdt = !GIT_EXTERNAL_DIFF=difft git show --ext-diff
+
+# I concede that rebase-ing is better then merging. Most of the time :-)
+[pull]
+        rebase = true
+
+# ...which means that 'git pull' should not force me to manually stash.
+[rebase]
+        autoStash = true
