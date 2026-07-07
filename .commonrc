@@ -241,7 +241,7 @@ if [[ $- == *i* ]] ; then
     # Under X with no keys loaded? Add them once.
     if env | grep DISPLAY >/dev/null ; then
         ssh-add -l |& grep '/.ssh/id_.*sa' > /dev/null || {
-            ssh-add
+            ssh-add -q
             # $HOME/dotfiles/setupSshAgentKeysViaPass.sh
         }
     fi
