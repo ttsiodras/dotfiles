@@ -235,6 +235,8 @@ alias ..2='cd ../../'
 alias ..3='cd ../../../'
 alias ..4='cd ../../../../'
 
+alias gt="git tag -n1 | sort -V"
+
 #############################################################
 # Interactive-only setup. Gated behind $- containing 'i' so
 # none of this (readline mode, key bindings, ssh-add's
