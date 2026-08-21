@@ -296,3 +296,7 @@ mdview() {
         return 1
     fi
 }
+
+# difft(astic) is amazing, but I only want the semantic awareness;
+# not the color noise from syntax highlighting
+export DFT_SYNTAX_HIGHLIGHT=off
