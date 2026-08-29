@@ -79,6 +79,12 @@ disown
 #/usr/local/bin/xlivebg &
 #disown
 
+# Signal-desktop was not showing the file attach dialog... and flameshot stopped working, too
+export XDG_CURRENT_DESKTOP=i3
+export XDG_SESSION_TYPE=x11
+systemctl --user import-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-gtk.service
+
 #. /etc/X11/Xsession
 exec /usr/bin/i3 --shmlog-size 0
 #exec /usr/bin/icewm-session
