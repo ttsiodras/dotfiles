@@ -43,6 +43,7 @@ autocutsel -selection PRIMARY -fork &
 
 # CAPS LOCK must be set to ESCAPE (Vim)
 setxkbmap -option ctrl:nocaps us
+# setxkbmap us,gr -option ctrl:nocaps,grp:shifts_toggle
 
 # For i3, Alt is a horrendous choice if you are Greek.
 # So set mod3 to the Cmd key.
