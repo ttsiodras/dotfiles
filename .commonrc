@@ -280,7 +280,7 @@ mdview() {
     fi
 
     local html
-    html=$(pandoc -f markdown -t html "$1" |
+    html=$(pandoc -f gfm -t html "$1" |
         sed 's/<table\([^>]*\)>/<table border="1"\1>/g')
 
     if type links >/dev/null 2>&1 || type links2 >/dev/null 2>&1 || type w3m >/dev/null 2>&1 ; then
