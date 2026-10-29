@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# tmux Ctrl+g: move the prompt being typed in the Claude in the current pane
+# into vim in a split below, then paste and submit it in that pane when vim
+# exits. Claude is left running untouched. Quitting with nothing written sends
+# nothing.
+# Run in the background by the tmux binding: claude-compose <pane>
+editor=(vim --no-servers) # vimisolated.sh: no network allowlist, starts ~1s faster
+
+target=$1
+# One draft per pane (%12 -> claude12.md), so Claudes in different panes
+# don't share a file. Kept out of /tmp: a sandboxed editor (e.g. vim under
+# firejail --private-tmp) sees a private /tmp and can't write the real one.
+dir=$HOME/.cache/claude-compose
+mkdir -p "$dir"
+file=$dir/claude${target#%}.md
+# Every prompt sent, from any pane, newest last.
+history=$dir/history.md
+touch "$history"
+
+# Pass Ctrl+g on to the pane. In a Claude whose $VISUAL is
+# claude-compose-editor, that hands the half-typed prompt to the editor, which
+# sees the grab file, moves the prompt into our draft, clears Claude's prompt,
+# and deletes the grab file. If the grab file is still there after 2s, the
+# pane isn't such a Claude, and it got its Ctrl+g as usual: stop here.
+grab=$dir/grab
+printf '%s' "$file" >"$grab"
+tmux send-keys -t "$target" C-g
+for _ in {1..20}; do
+  [[ -e $grab ]] || break
+  sleep 0.1
+done
+if [[ -e $grab ]]; then
+  rm -f "$grab"
+  exit 0
+fi
+# Vim only changes the draft's modification time when it saves, so a draft
+# no newer than this stamp afterwards means vim quit without saving.
+stamp=$dir/claude${target#%}.stamp
+touch "$stamp"
+
+# The editor is the pane's only command, so tmux sees the pane as running vim
+# (this matters for vim-tmux-navigator style Ctrl+h/j/k/l bindings).
+# Vim opens the history (read-only, at its end), then :next moves to the
+# draft, leaving the history as the alternate file for Ctrl-^. 'hidden' lets
+# Ctrl-^ leave the draft unsaved. The draft starts in insert mode at its end.
+pane=$(tmux split-window -v -l 50% -t "$target" -P -F '#{pane_id}' \
+  "$(printf '%q ' "${editor[@]}" '+setlocal nomodifiable' '+$' '+set hidden' \
+    +next '+$' '+startinsert!' "$history" "$file")") || exit
+
+# Wait for the editor pane to close (however it closes).
+while [[ $(tmux display -p -t "$pane" '#{pane_dead}' 2>/dev/null) == 0 ]]; do
+  sleep 0.2
+done
+
+# $(<) drops vim's trailing newline so the prompt doesn't end in a blank line.
+text=$(<"$file")
+saved=0
+[[ $file -nt $stamp ]] && saved=1
+rm -f "$stamp"
+
+# Quit without saving: put back what was typed in Claude, unsent.
+if ((!saved)); then
+  [[ -z $text ]] || {
+    tmux set-buffer -b claude-compose -- "$text" &&
+      tmux paste-buffer -p -d -b claude-compose -t "$target"
+  }
+  tmux select-pane -t "$target"
+  exit 0
+fi
+[[ -n ${text//[[:space:]]/} ]] || exit 0
+
+# -p sends it as a bracketed paste, so newlines don't submit the prompt early.
+tmux set-buffer -b claude-compose -- "$text" &&
+  tmux paste-buffer -p -d -b claude-compose -t "$target" &&
+  tmux select-pane -t "$target" || exit
+printf '# %s %s\n%s\n\n' "$(date '+%F %T')" "$target" "$text" >>"$history"
+
+# Give Claude a moment to finish taking in the paste, so the Enter submits
+# it rather than landing inside it as a newline.
+sleep 0.3
+tmux send-keys -t "$target" Enter

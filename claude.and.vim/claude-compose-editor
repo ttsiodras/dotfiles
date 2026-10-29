@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Claude Code's editor ($VISUAL): Claude's Ctrl+g runs it on a temp file
+# holding the current prompt. When claude-compose asked for that prompt (by
+# leaving a grab file naming its draft), move the prompt into the draft and
+# empty the temp file, which clears Claude's prompt. Otherwise behave as the
+# normal editor.
+grab=$HOME/.cache/claude-compose/grab
+if [[ -f $grab ]]; then
+  draft=$(<"$grab")
+  cat -- "$1" >"$draft"
+  : >"$1"
+  rm -f -- "$grab"
+  exit 0
+fi
+exec "${EDITOR:-vi}" "$@"
