@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# pi's Ctrl+G editor *inside* pi.isolated.sh's sandbox ($VISUAL/
+# settings.externalEditor when pi runs under isolate.sh/firejail).
+#
+# Same contract as claude-compose-editor, with one difference: the fallback
+# editor must be a plain vim, not ${EDITOR}.
+#
+# 1. Ctrl+g compose (tmux): claude-compose left a grab file naming this pane's
+#    draft, so hand the prompt over exactly like Claude does (move it into the
+#    draft, empty the temp file so pi's prompt is cleared) and exit. The
+#    host-side claude-compose then opens vim in a tmux split.
+# 2. Otherwise edit in place with a plain vim. ${EDITOR} here is
+#    ~/bin.local/vim -> vimisolated.sh, which would nest isolate.sh *inside*
+#    this sandbox, where it dies ("could not detect default network interface":
+#    --net=none has no default route), so the editor would silently do nothing
+#    and pi would just flash "Launching external editor..." and resume.
+#    This sandbox already confines vim (no network, read-only $HOME), and
+#    pi.isolated.sh makes ~/.vim/{backup,swp,undo,viminfo,sessions} writable,
+#    so plain vim is both sufficient and the only thing that works here.
+
+here=$(dirname -- "$(realpath -- "$0")")
+
+grab=$HOME/.cache/claude-compose/grab
+if [[ -f $grab ]]; then
+    exec "$here/claude-compose-editor" "$@"
+fi
+
+# Outside such a sandbox (a normal pi run) there is no reason to bypass the
+# user's editor, so prefer it whenever networking looks normal.  Only a
+# no-network sandbox lacks a default route, which is exactly the case where
+# nesting the isolation launcher fails.
+if [[ -n ${EDITOR:-} ]] && ip route show default 2>/dev/null | grep -q .; then
+    exec "$EDITOR" "$@"
+fi
+
+# Pick the first `vim` on PATH that is neither this script, the isolation
+# launcher, nor the ~/bin.local/vim shim (same rule as vimisolated.sh).
+self=$(realpath -- "$0")
+IFS=: read -r -a dirs <<<"$PATH"
+for d in "${dirs[@]}"; do
+    [[ -n $d ]] || continue
+    cand=$d/vim
+    [[ -x $cand ]] || continue
+    real=$(realpath -- "$cand")
+    [[ $real == "$self" ]] && continue
+    case $real in
+        */bin.local/vim|*/vimisolated.sh) continue ;;
+    esac
+    exec "$real" "$@"
+done
+for cand in /usr/local/bin/vim /usr/bin/vim /bin/vim; do
+    [[ -x $cand ]] && exec "$cand" "$@"
+done
+echo "pi-editor-in-sandbox: no plain vim found on PATH" >&2
+exit 127
