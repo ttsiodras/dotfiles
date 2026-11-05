@@ -304,3 +304,12 @@ export DFT_SYNTAX_HIGHLIGHT=off
 # Claude steals my mouse-instant-selection at work. BEGONE, demon
 export CLAUDE_CODE_NO_FLICKER=1
 export CLAUDE_CODE_DISABLE_MOUSE=1
+
+# Bluetooth: stopping bluetooth.service does NOT power the radio down - the
+# kernel driver (btusb/hci0) stays loaded and the controller stays
+# rfkill-unblocked. rfkill is the actual transmitter gate; systemd-rfkill
+# persists the soft-block state in /var/lib/systemd/rfkill/ across reboots.
+# bluetooth.service is disabled, so this is the on-demand pattern.
+alias bt-on='sudo rfkill unblock bluetooth && sudo systemctl start bluetooth'
+alias bt-off='sudo systemctl stop bluetooth && sudo rfkill block bluetooth'
+alias bt-status='rfkill list bluetooth; systemctl is-active bluetooth'
