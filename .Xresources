@@ -12,17 +12,26 @@
 *XTerm*faceNameDoublesize: Droid Sans Mono
 *XTerm*fontMenu*fontdefault*Label: Default
 *XTerm*fontMenu*font1*Label: Unreadable
-XTerm*font1: xft:Droid Sans Mono:size=4
+XTerm*font1: xft:Droid Sans Mono:size=5
 *XTerm*fontMenu*font2*Label: Tiny
-XTerm*font2: xft:Droid Sans Mono:size=5
+XTerm*font2: xft:Droid Sans Mono:size=6
 *XTerm*fontMenu*font3*Label: Small
-XTerm*font3: xft:Droid Sans Mono:size=6
+XTerm*font3: xft:Droid Sans Mono:size=7
 *XTerm*fontMenu*font4*Label: Medium
-XTerm*font4: xft:Droid Sans Mono:size=7
+XTerm*font4: xft:Droid Sans Mono:size=8
 *XTerm*fontMenu*font5*Label: Large
-XTerm*font5: xft:Droid Sans Mono:size=8
+XTerm*font5: xft:Droid Sans Mono:size=9
 *XTerm*fontMenu*font6*Label: Huge
-XTerm*font6: xft:Droid Sans Mono:size=9
+XTerm*font6: xft:Droid Sans Mono:size=10
+
+! Give larger-vt-font()/smaller-vt-font() a discrete, evenly-spaced ladder.
+! Without these, xterm falls back to its ~1.2x geometric scaling.
+XTerm*faceSize1: 5
+XTerm*faceSize2: 6
+XTerm*faceSize3: 7
+XTerm*faceSize4: 8
+XTerm*faceSize5: 9
+XTerm*faceSize6: 10
 
 ! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
 ! word selection selects urls and files/paths completely
