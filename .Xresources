@@ -1,27 +1,27 @@
-*VT100*foreground:      grey66
-*VT100*colorBDMode:     true
-*VT100*background:      black
-*VT100*saveLines:       2500
-*VT100*scrollBar:       true
-*VT100*visualBell:      true
-*XTerm*font:            Droid Sans Mono
-*XTerm*faceName:        Droid Sans Mono
-*XTerm*faceSize:        7
-*XTerm*renderFont:      true
+XTerm*VT100*foreground:      grey66
+XTerm*VT100*colorBDMode:     true
+XTerm*VT100*background:      black
+XTerm*VT100*saveLines:       2500
+XTerm*VT100*scrollBar:       true
+XTerm*VT100*visualBell:      true
+XTerm*font:            Droid Sans Mono
+XTerm*faceName:        Droid Sans Mono
+XTerm*faceSize:        7
+XTerm*renderFont:      true
 
-*XTerm*faceNameDoublesize: Droid Sans Mono
-*XTerm*fontMenu*fontdefault*Label: Default
-*XTerm*fontMenu*font1*Label: Unreadable
+XTerm*faceNameDoublesize: Droid Sans Mono
+XTerm*fontMenu*fontdefault*Label: Default
+XTerm*fontMenu*font1*Label: Unreadable
 XTerm*font1: xft:Droid Sans Mono:size=5
-*XTerm*fontMenu*font2*Label: Tiny
+XTerm*fontMenu*font2*Label: Tiny
 XTerm*font2: xft:Droid Sans Mono:size=6
-*XTerm*fontMenu*font3*Label: Small
+XTerm*fontMenu*font3*Label: Small
 XTerm*font3: xft:Droid Sans Mono:size=7
-*XTerm*fontMenu*font4*Label: Medium
+XTerm*fontMenu*font4*Label: Medium
 XTerm*font4: xft:Droid Sans Mono:size=8
-*XTerm*fontMenu*font5*Label: Large
+XTerm*fontMenu*font5*Label: Large
 XTerm*font5: xft:Droid Sans Mono:size=9
-*XTerm*fontMenu*font6*Label: Huge
+XTerm*fontMenu*font6*Label: Huge
 XTerm*font6: xft:Droid Sans Mono:size=10
 
 ! Give larger-vt-font()/smaller-vt-font() a discrete, evenly-spaced ladder.
@@ -32,6 +32,7 @@ XTerm*faceSize3: 7
 XTerm*faceSize4: 8
 XTerm*faceSize5: 9
 XTerm*faceSize6: 10
+XTerm*faceSize7: 11
 
 ! http://lukas.zapletalovi.com/2013/07/hidden-gems-of-xterm.html
 ! word selection selects urls and files/paths completely
@@ -52,6 +53,60 @@ XTerm*VT100.Translations: #override \n\
      Ctrl <Key> 0: larger-vt-font() \n\
      Ctrl <Key>F12: set-reverse-video(toggle)
 
-*XTerm*allowWindowOps: true
-*XTerm*allowFontOps: true
-*XTerm*allowTitleOps: true
+XTerm*allowWindowOps: true
+XTerm*allowFontOps: true
+XTerm*allowTitleOps: true
+
+!
+! Place machine-specific values in ~/.Xresources.local, never in this file.
+!
+!=============================================
+! MERGE ORDER (identical under startx and GDM)
+!=============================================
+!
+!   ~/.xinitrc sources ~/.xprofile, which merges in order:
+!
+!     .Xresources  ->  .Xdefaults  ->  .Xresources.local
+!
+!   .Xresources.local therefore always wins.  Do not copy this file into it;
+!   put only the per-machine deltas there.
+!
+!=======================================
+! PER-MACHINE FILE (~/.Xresources.local)
+!=======================================
+!
+!   Typical contents:
+!     Xft.dpi: 160                   global Xft scale (all Xft apps)
+!     XTerm*faceSize: 10             xterm default, in points
+!     XTerm*faceSize1..7: 8..14      Ctrl-9/Ctrl-0 ladder (see below)
+!
+!====
+! DPI
+!====
+!
+!   Prefer the real panel size over xdpyinfo, which may report wrong:
+!
+!     xrandr | grep connected           -> 302mm x 189mm
+!     dpi = round(25.4 * px / mm)       -> 25.4*1920/302 ~= 161
+!
+!   25.4 is mm per inch (1 inch = 25.4 mm exactly), so
+!
+!     dpi = px / (mm/25.4) = 25.4*px/mm.
+!
+!=================
+! FONT SIZE LADDER
+!=================
+!
+!   Ctrl-9/Ctrl-0 (smaller-vt-font/larger-vt-font) step through faceSizeN.
+!   Here: default 7, ladder 5..11 = default-2 .. default+4.
+!   On a machine whose local faceSize is N, set all seven to N-2 .. N+4.
+!   All seven (1..7) must be set: xterm stops at the top of the ladder only
+!   when every faceSizeN is present.  With 1..6 only, Ctrl-0 at the top falls
+!   back to the bitmap Enormous font (about 2x too big).
+!   faceSizeN overrides the size= in fontN; if both are kept, keep them equal.
+!
+!================
+! OPERATING NOTES
+!================
+!
+!   - xterm reads resources at startup; only new terminals see a change.

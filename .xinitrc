@@ -1,5 +1,4 @@
 #!/bin/bash
-# HOME=/home/ttsiod
 # Ensure /usr/bin is on PATH at X start (some BSD display managers start X with
 # a minimal PATH). Harmless on Linux where it is already present.
 export PATH=/usr/bin:$PATH
@@ -19,7 +18,7 @@ echo "$XFT_SETTINGS" | xrdb -merge > /dev/null 2>&1
 # My X11 settings. GDM sources ~/.xprofile automatically; startx doesn't, so we
 # source it here. ~/.xprofile merges ALL X resources (.Xresources, .Xdefaults,
 # .Xresources.local) so GDM and startx end up identical.
-[ -f $HOME/.xprofile ] && . $HOME/.xprofile
+[ -f "$HOME"/.xprofile ] && ."$HOME"/.xprofile
 
 # Being able to lock is useful
 # xscreensaver &
@@ -57,13 +56,12 @@ setxkbmap -option ctrl:nocaps us
 # xmodmap -e "add mod3 = Super_L"
 
 # A terminal is always nice - esp. for i3 and a bad 'mod' setting...
-xterm &
+( sleep 2 ; i3-msg 'workspace 1' ; xterm ) &
 
 # I live in i3, and I need some automation
-( sleep 1 ; i3-msg 'workspace 10; exec xterm -e /home/ttsiod/bin.local/genesis.sh' ) &
-( sleep 2.4 ; i3-msg 'workspace 2' ) &
+( sleep 1 ; i3-msg "workspace 10; exec xterm -e $HOME/bin.local/genesis.sh" ) &
 
-/home/ttsiod/bin.local/backgrounds.pl &
+"$HOME"/bin.local/backgrounds.pl &
 disown
 
 # Nice background in space
@@ -85,6 +83,8 @@ export XDG_CURRENT_DESKTOP=i3
 export XDG_SESSION_TYPE=x11
 systemctl --user import-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-gtk.service
+
+"$HOME"/bin/brightScreen.sh 12000
 
 #. /etc/X11/Xsession
 exec /usr/bin/i3 --shmlog-size 0
