@@ -18,7 +18,7 @@ echo "$XFT_SETTINGS" | xrdb -merge > /dev/null 2>&1
 # My X11 settings. GDM sources ~/.xprofile automatically; startx doesn't, so we
 # source it here. ~/.xprofile merges ALL X resources (.Xresources, .Xdefaults,
 # .Xresources.local) so GDM and startx end up identical.
-[ -f "$HOME"/.xprofile ] && ."$HOME"/.xprofile
+[ -f "$HOME/.xprofile" ] && . "$HOME/.xprofile"
 
 # Being able to lock is useful
 # xscreensaver &
